@@ -71,7 +71,6 @@ public class player : MonoBehaviour
         if (rigid.velocity.x < maxSpeed * -1)
             rigid.velocity = new Vector2(maxSpeed * -1, rigid.velocity.y);
 
-
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
@@ -92,14 +91,21 @@ public class player : MonoBehaviour
         if (isGrounded && !isOnSlope && !isJumping) { //평지
             newVelocity.Set(maxSpeed * h, 0.0f);
             rigid.velocity = newVelocity;
+            anim.SetFloat("jumpValue", 0);
+            anim.SetBool("isJump", false);
+            Debug.Log("test");
         }
         else if(isGrounded && isOnSlope && !isJumping) { // 경사면
             newVelocity.Set(maxSpeed * slopeNormalPerp.x * -h, maxSpeed * slopeNormalPerp.y * -h);
             rigid.velocity = newVelocity;
+            anim.SetBool("isJump", false);
         }
         else if (!isGrounded){ // 점프중
             newVelocity.Set(maxSpeed * h, rigid.velocity.y);
             rigid.velocity = newVelocity;
+            Debug.Log("TTTest");
+            anim.SetBool("isJump", true);
+            anim.SetFloat("jumpValue", rigid.velocity.y);
         }
     }
     private void CheckGround() {
@@ -119,6 +125,8 @@ public class player : MonoBehaviour
     private void SlopeCheckHorizontal(Vector2 checkPos) {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
+        Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
+        Debug.DrawRay(slopeHitBack.point, slopeHitBack.normal, Color.magenta);
 
         if (slopeHitFront) {
             isOnSlope = true;
