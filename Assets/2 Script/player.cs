@@ -93,7 +93,6 @@ public class player : MonoBehaviour
             rigid.velocity = newVelocity;
             anim.SetFloat("jumpValue", 0);
             anim.SetBool("isJump", false);
-            Debug.Log("test");
         }
         else if(isGrounded && isOnSlope && !isJumping) { // 경사면
             newVelocity.Set(maxSpeed * slopeNormalPerp.x * -h, maxSpeed * slopeNormalPerp.y * -h);
@@ -103,7 +102,6 @@ public class player : MonoBehaviour
         else if (!isGrounded){ // 점프중
             newVelocity.Set(maxSpeed * h, rigid.velocity.y);
             rigid.velocity = newVelocity;
-            Debug.Log("TTTest");
             anim.SetBool("isJump", true);
             anim.SetFloat("jumpValue", rigid.velocity.y);
         }
@@ -125,8 +123,8 @@ public class player : MonoBehaviour
     private void SlopeCheckHorizontal(Vector2 checkPos) {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
-        Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
-        Debug.DrawRay(slopeHitBack.point, slopeHitBack.normal, Color.magenta);
+        //Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
+        //Debug.DrawRay(slopeHitBack.point, slopeHitBack.normal, Color.magenta);
 
         if (slopeHitFront) {
             isOnSlope = true;
@@ -156,8 +154,6 @@ public class player : MonoBehaviour
 
             Debug.DrawRay(rayHit.point, slopeNormalPerp, Color.red);
             Debug.DrawRay(rayHit.point, rayHit.normal, Color.green);
-
-            Debug.Log(isOnSlope);
         }
 
         if(isOnSlope && h == 0.0f) {
