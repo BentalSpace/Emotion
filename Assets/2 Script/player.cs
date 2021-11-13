@@ -35,6 +35,9 @@ public class player : MonoBehaviour
     private Vector2 slopeNormalPerp;
     private Vector2 newVelocity;
 
+    GameObject stageNumObject;
+    string chapterStageNum;
+
     //component
     Rigidbody2D rigid;
     Animator anim;
@@ -48,6 +51,20 @@ public class player : MonoBehaviour
         capsule = GetComponent<CapsuleCollider2D>();
 
         colliderSize = capsule.size;
+    }
+    void Start() {
+        //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
+        stageNumObject = GameObject.Find("StageNum");
+        chapterStageNum = stageNumObject.GetComponent<StageManager>().ChapterStageNum;
+        string[] temp = chapterStageNum.Split('-');
+        int stageNum = int.Parse(temp[1]);
+        Debug.Log(stageNum);
+
+        //스테이지에 맞는 포지션에 플레이어 스폰
+        GameObject pos = GameObject.Find("stage" + stageNum);
+        rigid.position = pos.transform.position;
+
+        Destroy(stageNumObject);
     }
 
     void Update() {
@@ -94,11 +111,14 @@ public class player : MonoBehaviour
             anim.SetFloat("jumpValue", 0);
             anim.SetBool("isJump", false);
         }
-        else if(isGrounded && isOnSlope && !isJumping) { // 경사면
+        else if (isGrounded && isOnSlope && !isJumping) { // 경사면
             newVelocity.Set(maxSpeed * slopeNormalPerp.x * -h, maxSpeed * slopeNormalPerp.y * -h);
             rigid.velocity = newVelocity;
             anim.SetBool("isJump", false);
         }
+        //if (isGrounded) {
+        //    rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        //}
         else if (!isGrounded){ // 점프중
             newVelocity.Set(maxSpeed * h, rigid.velocity.y);
             rigid.velocity = newVelocity;
