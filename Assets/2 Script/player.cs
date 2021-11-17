@@ -36,7 +36,7 @@ public class player : MonoBehaviour
     private Vector2 newVelocity;
 
     GameObject stageNumObject;
-    string chapterStageNum;
+    string chapterStageNum = null;
 
     //component
     Rigidbody2D rigid;
@@ -120,6 +120,7 @@ public class player : MonoBehaviour
         //    rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
         //}
         else if (!isGrounded){ // ¡°«¡¡ﬂ
+            canJump = false;
             newVelocity.Set(maxSpeed * h, rigid.velocity.y);
             rigid.velocity = newVelocity;
             anim.SetBool("isJump", true);
