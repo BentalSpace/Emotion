@@ -29,6 +29,7 @@ public class player : MonoBehaviour
     private bool isGrounded;
     private bool canJump;
     private bool isJumping;
+    [SerializeField]
     private bool isOnSlope;
 
     private Vector2 colliderSize;
@@ -58,7 +59,6 @@ public class player : MonoBehaviour
         chapterStageNum = stageNumObject.GetComponent<StageManager>().ChapterStageNum;
         string[] temp = chapterStageNum.Split('-');
         int stageNum = int.Parse(temp[1]);
-        Debug.Log(stageNum);
 
         //스테이지에 맞는 포지션에 플레이어 스폰
         GameObject pos = GameObject.Find("stage" + stageNum);
@@ -68,10 +68,11 @@ public class player : MonoBehaviour
     }
 
     void Update() {
+        //Jump
         if (Input.GetButtonDown("Jump")) {
             Jump();
         }
-        //animation
+        //Walk animation
         if (Mathf.Abs(rigid.velocity.x) > 0.2f)
             anim.SetBool("isWalk", true);
         else
@@ -82,15 +83,19 @@ public class player : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
         //rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
-
+        //Maxspeed limit
         if (rigid.velocity.x > maxSpeed)
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         if (rigid.velocity.x < maxSpeed * -1)
             rigid.velocity = new Vector2(maxSpeed * -1, rigid.velocity.y);
 
+        //flip
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("jumpEnd")
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            anim.SetTrigger("jumpAnimEnd");
         Move();
         CheckGround();
         SlopeCheck();
@@ -99,6 +104,7 @@ public class player : MonoBehaviour
         if (!canJump)
             return;
 
+        anim.SetBool("isJump", true);
         canJump = false;
         isJumping = true;
 
@@ -108,7 +114,7 @@ public class player : MonoBehaviour
         if (isGrounded && !isOnSlope && !isJumping) { //평지
             newVelocity.Set(maxSpeed * h, 0.0f);
             rigid.velocity = newVelocity;
-            anim.SetFloat("jumpValue", 0);
+            anim.SetFloat("jumpValue", rigid.velocity.y);
             anim.SetBool("isJump", false);
         }
         else if (isGrounded && isOnSlope && !isJumping) { // 경사면
@@ -123,8 +129,14 @@ public class player : MonoBehaviour
             canJump = false;
             newVelocity.Set(maxSpeed * h, rigid.velocity.y);
             rigid.velocity = newVelocity;
-            anim.SetBool("isJump", true);
             anim.SetFloat("jumpValue", rigid.velocity.y);
+
+            anim.SetBool("isGround", false);
+            //애니메이션 전환
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("jumpStart")
+                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f) {
+                anim.SetTrigger("jumping");
+            }
         }
     }
     private void CheckGround() {
@@ -132,8 +144,10 @@ public class player : MonoBehaviour
 
         if (rigid.velocity.y <= 0.0f)
             isJumping = false;
-        if (isGrounded && !isJumping)
+        if (isGrounded && !isJumping) {
             canJump = true;
+            anim.SetBool("isGround", true);
+        }
     }
     private void SlopeCheck() {
         Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
@@ -144,8 +158,8 @@ public class player : MonoBehaviour
     private void SlopeCheckHorizontal(Vector2 checkPos) {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
-        //Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
-        //Debug.DrawRay(slopeHitBack.point, slopeHitBack.normal, Color.magenta);
+       // Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
+       // Debug.DrawRay(slopeHitBack.point, slopeHitBack.normal, Color.magenta);
 
         if (slopeHitFront) {
             isOnSlope = true;
