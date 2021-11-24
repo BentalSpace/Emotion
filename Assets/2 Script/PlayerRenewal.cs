@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRenewal : MonoBehaviour {
     [SerializeField]
@@ -30,6 +31,8 @@ public class PlayerRenewal : MonoBehaviour {
     private bool canJump;
     private bool isGround;
     private bool isJumping;
+    private bool youCanJump;
+    private bool youCanCrawl;
 
     private Vector2 slopeNormalPerp;
     private Vector2 colliderSize;
@@ -49,6 +52,15 @@ public class PlayerRenewal : MonoBehaviour {
         animator = GetComponent<Animator>();
 
         colliderSize = capsule.size;
+
+        if (SceneManager.GetActiveScene().buildIndex == 1) {
+            youCanJump = false;
+            youCanCrawl = false;
+        }
+        else {
+            youCanJump = true;
+            youCanCrawl = true;
+        }
     }
     void Start() {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
@@ -62,6 +74,7 @@ public class PlayerRenewal : MonoBehaviour {
         rigid.position = pos.transform.position;
 
         Destroy(stageNumObject);
+        
     }
     void Update() {
         if (Input.GetButtonDown("Jump")) {
@@ -95,7 +108,7 @@ public class PlayerRenewal : MonoBehaviour {
             rigid.velocity = new Vector2(crawlSpeed * h, 0);
     }
     void Jump() {
-        if (!canJump)
+        if (!canJump || !youCanJump)
             return;
 
         canJump = false;
@@ -116,6 +129,8 @@ public class PlayerRenewal : MonoBehaviour {
         }
     }
     void Sit() {
+        if (animator.GetBool("isWalk") || !youCanCrawl)
+            return;
         if (Input.GetButton("Sit")) {
             animator.SetBool("isSit", true);
         }
@@ -212,6 +227,14 @@ public class PlayerRenewal : MonoBehaviour {
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.tag == "CanJump") {
+            youCanJump = true;
+        }
+        if(collision.tag == "CanCrawl") {
+            youCanCrawl = true;
+        }
+    }
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
