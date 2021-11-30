@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,11 +34,14 @@ public class PlayerRenewal : MonoBehaviour {
     private bool isJumping;
     private bool youCanJump;
     private bool youCanCrawl;
+    public bool idleCoroutinePlay;
 
     private Vector2 slopeNormalPerp;
     private Vector2 colliderSize;
 
     private GameObject stageNumObject;
+
+    IEnumerator idleDelay;
 
     //component
     Rigidbody2D rigid;
@@ -95,6 +99,7 @@ public class PlayerRenewal : MonoBehaviour {
         GroundCheck();
         ColliderChange();
         Sit();
+        Idle();
     }
 
     void Move() {
@@ -142,6 +147,22 @@ public class PlayerRenewal : MonoBehaviour {
            && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
             animator.SetTrigger("sitTrigger");
     }
+    void Idle() {
+        //idle 빌드업
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("stand") && !idleCoroutinePlay) {
+            idleDelay = IdleDelay();
+            StartCoroutine(idleDelay);
+        }
+        //중간에 움직였을 때
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("stand") && idleCoroutinePlay) {
+            idleCoroutinePlay = false;
+            StopCoroutine(idleDelay);
+        }
+        //애니메이션 종료
+        if (animator.GetBool("isIdle") && !idleCoroutinePlay) {
+            StartCoroutine(IdleEnd());
+        }
+    }
     void EtcMove() {
         //flipX and friction and walk animation
         if (Input.GetButton("Horizontal")) {
@@ -182,6 +203,22 @@ public class PlayerRenewal : MonoBehaviour {
             capsule.size = new Vector2(1, 2.2f);
         else
             capsule.size = new Vector2(1, 2.85f);
+    }
+
+    IEnumerator IdleDelay() {
+        idleCoroutinePlay = true;
+        yield return new WaitForSeconds(3f);
+
+        animator.SetBool("isIdle", true);
+        idleCoroutinePlay = false;
+    }
+    IEnumerator IdleEnd() {
+        idleCoroutinePlay = true;
+
+        yield return new WaitForSeconds(0.1f);
+
+        animator.SetBool("isIdle", false);
+        idleCoroutinePlay = false;
     }
 
     void SlopeCheck() {

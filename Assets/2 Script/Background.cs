@@ -15,10 +15,10 @@ public class Background : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        BackgroundScrolling();
 
     }
     void Update() {
+        BackgroundScrolling();
     }
 
     void BackgroundScrolling() {

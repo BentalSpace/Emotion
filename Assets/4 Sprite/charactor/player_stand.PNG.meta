@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 527694ce7b3cfce40baa34a39ed64fb5
+guid: b12db1c16645e6e479c663f4f4573f89
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5115618752126089108
-    second: player_idle_0
+      213: 5426992086352664609
+    second: player_stand_0
   - first:
-      213: -5937766766644145194
-    second: player_idle_2
+      213: -6713635969278435144
+    second: player_stand_1
   - first:
-      213: 6213080392227812279
-    second: player_idle_3
+      213: -5645684021975253929
+    second: player_stand_3
   - first:
-      213: 3690559776813112666
-    second: player_idle_4
+      213: -2071477791154956422
+    second: player_stand_5
   - first:
-      213: 8748236870546505689
-    second: player_idle_5
+      213: 5274665985968424310
+    second: player_stand_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,11 +106,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_idle_0
+      name: player_stand_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 19
+        x: 22
+        y: 18
         width: 116
         height: 310
       alignment: 0
@@ -120,20 +120,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c68823149dba109b0800000000000000
-      internalID: -5115618752126089108
+      spriteID: 12818e19c8c805b40800000000000000
+      internalID: 5426992086352664609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_2
+      name: player_stand_1
       rect:
         serializedVersion: 2
-        x: 173
-        y: 19
-        width: 113
-        height: 311
+        x: 172
+        y: 18
+        width: 116
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,20 +141,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d35e0bd590d89da0800000000000000
-      internalID: -5937766766644145194
+      spriteID: 8b0afd308af54d2a0800000000000000
+      internalID: -6713635969278435144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_3
+      name: player_stand_3
       rect:
         serializedVersion: 2
-        x: 327
-        y: 20
-        width: 114
-        height: 316
+        x: 322
+        y: 18
+        width: 116
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b3feabc2bb493650800000000000000
-      internalID: 6213080392227812279
+      spriteID: 75cf01c4b4086a1b0800000000000000
+      internalID: -5645684021975253929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_4
+      name: player_stand_5
       rect:
         serializedVersion: 2
-        x: 474
-        y: 19
-        width: 113
-        height: 311
+        x: 471
+        y: 18
+        width: 116
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,18 +183,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5d5a474090873330800000000000000
-      internalID: 3690559776813112666
+      spriteID: a7719129ce1a043e0800000000000000
+      internalID: -2071477791154956422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_idle_5
+      name: player_stand_7
       rect:
         serializedVersion: 2
         x: 621
-        y: 19
+        y: 18
         width: 116
         height: 310
       alignment: 0
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9df36e7651bf76970800000000000000
-      internalID: 8748236870546505689
+      spriteID: 675cb7294c0633940800000000000000
+      internalID: 5274665985968424310
       vertices: []
       indices: 
       edges: []

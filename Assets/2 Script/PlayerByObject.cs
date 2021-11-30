@@ -6,6 +6,7 @@ public class PlayerByObject : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
+            //장애물과 부딪혔을때
             Debug.Log("Test");
         }
     }
