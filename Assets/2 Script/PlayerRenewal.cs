@@ -22,7 +22,11 @@ public class PlayerRenewal : MonoBehaviour {
     [SerializeField]
     private LayerMask whatIsGround;
 
-    private string chapterStageNum;
+    public string chapterStageNum;
+    //public string chapterNum { 
+    //    get { return chapterStageNum[0]; }
+    //    set { value = chapterStageNum[0]; }
+    //}
 
     private float h;
     private float slopeDownAngle;
@@ -34,7 +38,7 @@ public class PlayerRenewal : MonoBehaviour {
     private bool isJumping;
     private bool youCanJump;
     private bool youCanCrawl;
-    public bool idleCoroutinePlay;
+    private bool idleCoroutinePlay;
 
     private Vector2 slopeNormalPerp;
     private Vector2 colliderSize;
@@ -58,8 +62,8 @@ public class PlayerRenewal : MonoBehaviour {
         colliderSize = capsule.size;
 
         if (SceneManager.GetActiveScene().buildIndex == 1) {
-            youCanJump = false;
-            youCanCrawl = false;
+            youCanJump = true;
+            youCanCrawl = true;
         }
         else {
             youCanJump = true;
@@ -70,15 +74,15 @@ public class PlayerRenewal : MonoBehaviour {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
         stageNumObject = GameObject.Find("StageNum");
         chapterStageNum = stageNumObject.GetComponent<StageManager>().ChapterStageNum;
-        string[] temp = chapterStageNum.Split('-');
-        int stageNum = int.Parse(temp[1]);
+        //int stageNum = int.Parse(chapterStageNum[1]);
 
         //스테이지에 맞는 포지션에 플레이어 스폰
-        GameObject pos = GameObject.Find("stage" + stageNum);
+        GameObject pos = GameObject.Find(chapterStageNum);
         rigid.position = pos.transform.position;
 
+        GameObject.Find("StageManager").GetComponent<StageManager>().ChapterStageNum = chapterStageNum;
+
         Destroy(stageNumObject);
-        
     }
     void Update() {
         if (Input.GetButtonDown("Jump")) {
@@ -190,19 +194,15 @@ public class PlayerRenewal : MonoBehaviour {
             animator.SetTrigger("jumpTrigger");
     }
     void ColliderChange() {
-        // 점프 착지 할때
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("jumpEnd")
-             && animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.9f)
-            capsule.size = new Vector2(1, 2.6f);
-        // 앉기 풀고 일어나는 도중
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitUp")
-            && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f)
-            capsule.size = new Vector2(1, 2.85f);
         // 앉을때
-        else if (animator.GetBool("isSit"))
+        if (animator.GetBool("isSit")) {
             capsule.size = new Vector2(1, 2.2f);
-        else
+            capsule.offset = new Vector2(capsule.offset.x, 1.2f);
+        }
+        else {
             capsule.size = new Vector2(1, 2.85f);
+            capsule.offset = new Vector2(0, 1.5f);
+        }
     }
 
     IEnumerator IdleDelay() {
@@ -223,12 +223,12 @@ public class PlayerRenewal : MonoBehaviour {
 
     void SlopeCheck() {
         // 경사인지 아닌지 체크하는 함수
-        Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2);
+        Vector2 checkPos = transform.position - new Vector3(0.0f, colliderSize.y / 2) + new Vector3(0.0f, capsule.offset.y);
 
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
-    private void SlopeCheckHorizontal(Vector2 checkPos) {
+    void SlopeCheckHorizontal(Vector2 checkPos) {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
         // Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);

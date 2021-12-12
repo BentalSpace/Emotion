@@ -15,6 +15,12 @@ public class CamerMove : MonoBehaviour
         z = transform.position.z;
     }
     void FixedUpdate() {
+        cameraMove();
+    }
+
+    public void cameraMove() {
+        if (player.transform.position.x <= 0.8)
+            return;
         cameraPos = new Vector3(player.transform.position.x, y, z);
         transform.position = cameraPos;
     }

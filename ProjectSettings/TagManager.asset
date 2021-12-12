@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CanJump
   - CanCrawl
+  - nextChapter
+  - stageSave
   layers:
   - Default
   - TransparentFX

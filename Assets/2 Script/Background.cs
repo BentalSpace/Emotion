@@ -23,7 +23,7 @@ public class Background : MonoBehaviour {
 
     void BackgroundScrolling() {
         //무한 배경
-        if (Camera.main.transform.position.x >= sprites[frontSprite].position.x + 5) {
+        if (Camera.main.transform.position.x >= sprites[frontSprite].position.x + 3) {
             //앞으로 이동중일때
             Vector3 backSpritePos = sprites[backSprite].localPosition;
             sprites[backSprite].localPosition = backSpritePos + Vector3.right * spriteSize;
@@ -32,7 +32,7 @@ public class Background : MonoBehaviour {
             frontSprite = backSprite;
             backSprite = frontSpriteSave - 1 == -1 ? sprites.Length - 1 : frontSpriteSave - 1;
         }
-        else if (Camera.main.transform.position.x <= sprites[backSprite].position.x - 5) {
+        else if (Camera.main.transform.position.x <= sprites[backSprite].position.x - 3) {
             //뒤로 이동중일때
             Vector3 backSpritePos = sprites[backSprite].localPosition;
             sprites[frontSprite].localPosition = backSpritePos + Vector3.left * spriteSize;
