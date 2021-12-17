@@ -8,11 +8,22 @@ public class PlayerByObject : MonoBehaviour
     [SerializeField]
     PlayerRenewal player;
     [SerializeField]
-    StageManager sm;
+    CamerMove cameraMove;
+    [SerializeField]
+    Fairy fairy;
+    [SerializeField]
+    GameObject seedling;
+    [SerializeField]
+    GameObject downFairy;
+
+    int index;
+    float[] targetPosX;
 
     bool coroutineRun;
+    bool move;
 
     IEnumerator dieCoroutine;
+    IEnumerator plantCoroutine;
 
 
     Animator animator;
@@ -21,39 +32,56 @@ public class PlayerByObject : MonoBehaviour
     void Awake() {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+
+        targetPosX = new float[2] { 158, 165f };
+
+        plantCoroutine = PlantATree();
+    }
+    private void Update() {
+        charMove();
     }
     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag == "stageSave") {
-            sm.ChapterStageNum = collision.gameObject.name;
-        }
-
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !coroutineRun) {
-            //Àå¾Ö¹°°ú ºÎµúÇûÀ»¶§
-            animator.SetTrigger("dieTrigger");
-            dieCoroutine = Die();
-            StartCoroutine(dieCoroutine);
-        }
-
-        if(collision.gameObject.tag == "nextChapter") {
-            GameObject chapterStage = GameObject.Find("StageManager");
-            chapterStage.name = "StageNum";
-            SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 2);
-            DontDestroyOnLoad(chapterStage);
+        if(collision.gameObject.tag == "animationStart" && !coroutineRun) {
+            player.dontInput = true;
+            StartCoroutine(plantCoroutine);
+            collision.gameObject.SetActive(false);
         }
     }
 
-    IEnumerator Die() {
+    IEnumerator PlantATree() {
+        index = 0;
+        animator.SetBool("isWalk", false);
         coroutineRun = true;
-        rigid.bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(2f);
-        coroutineRun = false;
+        rigid.sharedMaterial = null;
+        move = true;
 
-        //transform.position = new Vector2(0.0f, -2.0f);
-        GameObject chapterStage = GameObject.Find("StageManager");
-        chapterStage.name = "StageNum";
-        //rigid.bodyType = RigidbodyType2D.Dynamic;
-        //animator.SetTrigger("resTrigger");
-        SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 1);
-        DontDestroyOnLoad(chapterStage);
+        yield return new WaitForSeconds(2f);
+        seedling.SetActive(true);
+        index = 1;
+        yield return new WaitForSeconds(2f);
+        cameraMove.animMove = true;
+        yield return new WaitForSeconds(2f);
+        move = true;
+        yield return new WaitForSeconds(3f);
+        downFairy.SetActive(false);
+        fairy.animMove = true;
+
+        yield return new WaitForSeconds(2.5f);
+        player.dontInput = false;
+        animator.SetBool("isSit", false);
+        coroutineRun = false;
+    }
+    void charMove() {
+        if (!move)
+            return;
+        animator.SetTrigger("sitTrigger");
+        animator.SetBool("isSit", false);
+        animator.SetBool("isWalk", true);
+        rigid.velocity = new Vector2(player.MaxSpeed, rigid.velocity.y);
+        if (gameObject.transform.position.x >= targetPosX[index]) {
+            move = false;
+            animator.SetBool("isWalk", false);
+            animator.SetBool("isSit", true);
+        }
     }
 }

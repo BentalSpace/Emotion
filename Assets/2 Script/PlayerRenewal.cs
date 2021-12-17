@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerRenewal : MonoBehaviour {
     [SerializeField]
+    private StageManager sm;
+    [SerializeField]
     private float maxSpeed;
     [SerializeField]
     private float jumpPower;
@@ -21,14 +23,22 @@ public class PlayerRenewal : MonoBehaviour {
     private Transform groundCheck;
     [SerializeField]
     private LayerMask whatIsGround;
+    [SerializeField]
+    private AudioClip footStep;
 
     public string chapterStageNum;
     //public string chapterNum { 
     //    get { return chapterStageNum[0]; }
     //    set { value = chapterStageNum[0]; }
     //}
+    public float MaxSpeed {
+        get { return maxSpeed; }
+    }
 
     private float h;
+    public float H {
+        get { return h; }
+    }
     private float slopeDownAngle;
     private float slopeDownAngleOld;
 
@@ -39,6 +49,11 @@ public class PlayerRenewal : MonoBehaviour {
     private bool youCanJump;
     private bool youCanCrawl;
     private bool idleCoroutinePlay;
+    public bool dontInput;
+    private bool jumpEnd;
+    private bool isSitUp;
+    private bool coroutineRun;
+
 
     private Vector2 slopeNormalPerp;
     private Vector2 colliderSize;
@@ -46,29 +61,36 @@ public class PlayerRenewal : MonoBehaviour {
     private GameObject stageNumObject;
 
     IEnumerator idleDelay;
+    IEnumerator dieCoroutine;
 
     //component
     Rigidbody2D rigid;
     CapsuleCollider2D capsule;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    AudioSource audioSource;
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         colliderSize = capsule.size;
 
         if (SceneManager.GetActiveScene().buildIndex == 1) {
-            youCanJump = true;
-            youCanCrawl = true;
+
+            youCanJump = false;
+            youCanCrawl = false;
         }
         else {
             youCanJump = true;
             youCanCrawl = true;
         }
+        jumpEnd = true;
+
+        dieCoroutine = Die();
     }
     void Start() {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
@@ -82,6 +104,17 @@ public class PlayerRenewal : MonoBehaviour {
 
         GameObject.Find("StageManager").GetComponent<StageManager>().ChapterStageNum = chapterStageNum;
 
+        int chapter = int.Parse(chapterStageNum.Split('-')[0]);
+        int stage = int.Parse(chapterStageNum.Split('-')[1]);
+
+        if (chapter == 0) {
+            if (stage >= 1) {
+                youCanJump = true;
+            }
+            if (stage >= 3) {
+                youCanCrawl = true;
+            }
+        }
         Destroy(stageNumObject);
     }
     void Update() {
@@ -89,13 +122,12 @@ public class PlayerRenewal : MonoBehaviour {
             Jump();
         }
         
-        if (Input.GetButtonUp("Sit") || !Input.GetButton("Sit")) {
+        if ((Input.GetButtonUp("Sit") || !Input.GetButton("Sit")) && !dontInput) {
             animator.SetTrigger("sitTrigger");
         }
     }
     void FixedUpdate() {
-        h = Input.GetAxisRaw("Horizontal");
-
+        setHorizontal();
         EtcMove();
 
         Move();
@@ -105,9 +137,16 @@ public class PlayerRenewal : MonoBehaviour {
         Sit();
         Idle();
     }
-
+    void setHorizontal() {
+        if (isSitUp)
+            return;
+        h = Input.GetAxisRaw("Horizontal");
+    }
     void Move() {
         //Move
+        if (dontInput || isSitUp)
+            return;
+
         if (!isSlope)
             rigid.velocity = new Vector2(maxSpeed * h, rigid.velocity.y);
         else if (isSlope && !isJumping)
@@ -117,15 +156,25 @@ public class PlayerRenewal : MonoBehaviour {
             rigid.velocity = new Vector2(crawlSpeed * h, 0);
     }
     void Jump() {
-        if (!canJump || !youCanJump)
+        if (!canJump || !youCanJump || dontInput || !jumpEnd)
             return;
 
         canJump = false;
         isJumping = true;
+        jumpEnd = false;
         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
     void GroundCheck() {
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+
+        if (isGround && animator.GetBool("isWalk") && !audioSource.isPlaying) {
+            audioSource.clip = footStep;
+            audioSource.Play();
+        }
+        else if (!isGround || !animator.GetBool("isWalk")) {
+            audioSource.clip = null;
+            audioSource.Stop();
+        }
 
         if (rigid.velocity.y <= 0)
             isJumping = false;
@@ -135,17 +184,23 @@ public class PlayerRenewal : MonoBehaviour {
 
         if (!isGround) {
             canJump = false;
+            audioSource.Stop();
         }
     }
     void Sit() {
-        if (animator.GetBool("isWalk") || !youCanCrawl)
+        if (animator.GetBool("isWalk") || !youCanCrawl || dontInput)
             return;
         if (Input.GetButton("Sit")) {
             animator.SetBool("isSit", true);
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitUp")
-          && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+          && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f) {
             animator.SetBool("isSit", false);
+            isSitUp = false;
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitUp")){
+            isSitUp = true;
+        }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitDown")
            && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
@@ -169,12 +224,15 @@ public class PlayerRenewal : MonoBehaviour {
     }
     void EtcMove() {
         //flipX and friction and walk animation
-        if (Input.GetButton("Horizontal")) {
+        if (dontInput)
+            return;
+
+        if (Input.GetButton("Horizontal") && !isSitUp) {
             rigid.sharedMaterial = noFriction;
             spriteRenderer.flipX = h == -1;
             animator.SetBool("isWalk", true);
         }
-        else {
+        else if(!Input.GetButton("Horizontal")) {
             rigid.sharedMaterial = fullFriction;
             animator.SetBool("isWalk", false);
         }
@@ -190,14 +248,16 @@ public class PlayerRenewal : MonoBehaviour {
         animator.SetBool("isGround", isGround);
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("jumpEnd")
-             && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+             && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f) { 
             animator.SetTrigger("jumpTrigger");
+            jumpEnd = true;
+        }
     }
     void ColliderChange() {
         // 앉을때
         if (animator.GetBool("isSit")) {
-            capsule.size = new Vector2(1, 2.2f);
-            capsule.offset = new Vector2(capsule.offset.x, 1.2f);
+            capsule.size = new Vector2(1, 1.5f);
+            capsule.offset = new Vector2(capsule.offset.x, 0.85f);
         }
         else {
             capsule.size = new Vector2(1, 2.85f);
@@ -259,8 +319,8 @@ public class PlayerRenewal : MonoBehaviour {
             }
             slopeDownAngleOld = slopeDownAngle;
 
-            Debug.DrawRay(rayHit.point, slopeNormalPerp, Color.red);
-            Debug.DrawRay(rayHit.point, rayHit.normal, Color.green);
+            //Debug.DrawRay(rayHit.point, slopeNormalPerp, Color.red);
+            //Debug.DrawRay(rayHit.point, rayHit.normal, Color.green);
         }
     }
 
@@ -271,6 +331,34 @@ public class PlayerRenewal : MonoBehaviour {
         if(collision.tag == "CanCrawl") {
             youCanCrawl = true;
         }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !coroutineRun) {
+            //장애물과 부딪혔을때
+            animator.SetTrigger("dieTrigger");
+            StartCoroutine(dieCoroutine);
+        }
+        if (collision.gameObject.tag == "stageSave") {
+            //구간 저장
+            sm.ChapterStageNum = collision.gameObject.name;
+        }
+        if (collision.gameObject.tag == "nextChapter") {
+            //다음 챕터로 이동
+            GameObject chapterStage = GameObject.Find("StageManager");
+            chapterStage.name = "StageNum";
+            SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 2);
+            DontDestroyOnLoad(chapterStage);
+        }
+
+    }
+    IEnumerator Die() {
+        coroutineRun = true;
+        dontInput = true;
+        yield return new WaitForSeconds(2f);
+        coroutineRun = false;
+
+        GameObject chapterStage = GameObject.Find("StageManager");
+        chapterStage.name = "StageNum";
+        SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 1);
+        DontDestroyOnLoad(chapterStage);
     }
 
     private void OnDrawGizmos() {

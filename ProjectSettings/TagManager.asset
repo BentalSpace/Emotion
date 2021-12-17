@@ -8,6 +8,8 @@ TagManager:
   - CanCrawl
   - nextChapter
   - stageSave
+  - animationStart
+  - skill
   layers:
   - Default
   - TransparentFX

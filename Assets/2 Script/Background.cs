@@ -6,7 +6,11 @@ public class Background : MonoBehaviour {
     [SerializeField]
     private int backSprite;
     [SerializeField]
+    float speed;
+    [SerializeField]
     private Transform[] sprites;
+    [SerializeField]
+    PlayerRenewal player;
 
     private float spriteSize;
 
@@ -19,6 +23,9 @@ public class Background : MonoBehaviour {
     }
     void Update() {
         BackgroundScrolling();
+        Vector2 curPos = transform.position;
+        Vector2 nextPos = new Vector2(player.H, 0) * speed * Time.deltaTime;
+        transform.position = curPos + nextPos;
     }
 
     void BackgroundScrolling() {
