@@ -11,11 +11,11 @@ public class Background : MonoBehaviour {
     private Transform[] sprites;
     [SerializeField]
     PlayerRenewal player;
-
-    private float spriteSize;
+    [SerializeField]
+    float spriteSize;
 
     void Awake() {
-        spriteSize = 28.8f;
+        //spriteSize = 57.6f;
     }
 
     void FixedUpdate() {

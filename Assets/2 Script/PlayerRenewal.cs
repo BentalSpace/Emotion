@@ -6,7 +6,7 @@ public class PlayerRenewal : MonoBehaviour {
     [SerializeField]
     private StageManager sm;
     [SerializeField]
-    private float maxSpeed;
+    private float walkSpeed;
     [SerializeField]
     private float jumpPower;
     [SerializeField]
@@ -32,7 +32,7 @@ public class PlayerRenewal : MonoBehaviour {
     //    set { value = chapterStageNum[0]; }
     //}
     public float MaxSpeed {
-        get { return maxSpeed; }
+        get { return applySpeed; }
     }
 
     private float h;
@@ -41,6 +41,7 @@ public class PlayerRenewal : MonoBehaviour {
     }
     private float slopeDownAngle;
     private float slopeDownAngleOld;
+    private float applySpeed;
 
     private bool isSlope;
     private bool canJump;
@@ -70,6 +71,8 @@ public class PlayerRenewal : MonoBehaviour {
     Animator animator;
     AudioSource audioSource;
 
+    int chapter, stage = 0;
+
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
@@ -81,8 +84,8 @@ public class PlayerRenewal : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().buildIndex == 1) {
 
-            youCanJump = false;
-            youCanCrawl = false;
+            youCanJump = true;
+            youCanCrawl = true;
         }
         else {
             youCanJump = true;
@@ -91,21 +94,28 @@ public class PlayerRenewal : MonoBehaviour {
         jumpEnd = true;
 
         dieCoroutine = Die();
+        applySpeed = walkSpeed;
     }
     void Start() {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
         stageNumObject = GameObject.Find("StageNum");
-        chapterStageNum = stageNumObject.GetComponent<StageManager>().ChapterStageNum;
-        //int stageNum = int.Parse(chapterStageNum[1]);
+        //Debug.Log(stageNumObject.name);
+        if (stageNumObject == null) {
+            Debug.Log("chapter stage number not find");
+        }
+        else {
+            chapterStageNum = stageNumObject.GetComponent<StageManager>().ChapterStageNum;
+            //int stageNum = int.Parse(chapterStageNum[1]);
 
-        //스테이지에 맞는 포지션에 플레이어 스폰
-        GameObject pos = GameObject.Find(chapterStageNum);
-        rigid.position = pos.transform.position;
+            //스테이지에 맞는 포지션에 플레이어 스폰
+            GameObject pos = GameObject.Find(chapterStageNum);
+            rigid.position = pos.transform.position;
+
+            chapter = int.Parse(chapterStageNum.Split('-')[0]);
+            stage = int.Parse(chapterStageNum.Split('-')[1]);
+        }
 
         GameObject.Find("StageManager").GetComponent<StageManager>().ChapterStageNum = chapterStageNum;
-
-        int chapter = int.Parse(chapterStageNum.Split('-')[0]);
-        int stage = int.Parse(chapterStageNum.Split('-')[1]);
 
         if (chapter == 0) {
             if (stage >= 1) {
@@ -118,13 +128,17 @@ public class PlayerRenewal : MonoBehaviour {
         Destroy(stageNumObject);
     }
     void Update() {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButton("Jump")) {
             Jump();
+        }
+        else if (Input.GetButtonUp("Jump")) {
+            animator.SetBool("isJumpPress", false);
         }
         
         if ((Input.GetButtonUp("Sit") || !Input.GetButton("Sit")) && !dontInput) {
             animator.SetTrigger("sitTrigger");
         }
+        Sit();
     }
     void FixedUpdate() {
         setHorizontal();
@@ -134,7 +148,6 @@ public class PlayerRenewal : MonoBehaviour {
         SlopeCheck();
         GroundCheck();
         ColliderChange();
-        Sit();
         Idle();
     }
     void setHorizontal() {
@@ -148,21 +161,23 @@ public class PlayerRenewal : MonoBehaviour {
             return;
 
         if (!isSlope)
-            rigid.velocity = new Vector2(maxSpeed * h, rigid.velocity.y);
+            rigid.velocity = new Vector2(applySpeed * h, rigid.velocity.y);
         else if (isSlope && !isJumping)
-            rigid.velocity = new Vector2(maxSpeed * slopeNormalPerp.x * -h, maxSpeed * slopeNormalPerp.y * -h);
+            rigid.velocity = new Vector2(applySpeed * slopeNormalPerp.x * -h, applySpeed * slopeNormalPerp.y * -h);
         //기어가고 있을 때 속도
-        if(animator.GetBool("isSit") && animator.GetBool("isWalk"))
-            rigid.velocity = new Vector2(crawlSpeed * h, 0);
+        //if(animator.GetBool("isSit") && animator.GetBool("isWalk"))
+        //    rigid.velocity = new Vector2(crawlSpeed * h, 0);
     }
     void Jump() {
-        if (!canJump || !youCanJump || dontInput || !jumpEnd)
+        if (!canJump || !youCanJump || dontInput || (!jumpEnd && !animator.GetBool("isJumpPress")))
             return;
 
         canJump = false;
         isJumping = true;
         jumpEnd = false;
-        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        //rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        rigid.velocity = new Vector2(applySpeed * h, jumpPower);
+        animator.SetBool("isJumpPress", true);
     }
     void GroundCheck() {
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -188,10 +203,14 @@ public class PlayerRenewal : MonoBehaviour {
         }
     }
     void Sit() {
-        if (animator.GetBool("isWalk") || !youCanCrawl || dontInput)
+        if (/*animator.GetBool("isWalk") ||*/ !youCanCrawl || dontInput)
             return;
-        if (Input.GetButton("Sit")) {
+        if (Input.GetButton("Sit")/* && !animator.GetBool("isSit")*/) {
             animator.SetBool("isSit", true);
+            applySpeed = crawlSpeed;
+        }
+        else if (Input.GetButtonUp("Sit")) {
+            applySpeed = walkSpeed;
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitUp")
           && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f) {
