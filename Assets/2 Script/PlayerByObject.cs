@@ -64,7 +64,8 @@ public class PlayerByObject : MonoBehaviour
         move = true;
         yield return new WaitForSeconds(3f);
         downFairy.SetActive(false);
-        fairy.animMove = true;
+        //fairy.animMove = true;
+        fairy.StartCoroutine("AnimMove1");
 
         yield return new WaitForSeconds(2.5f);
         player.dontInput = false;

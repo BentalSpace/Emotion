@@ -14,8 +14,11 @@ public class Background : MonoBehaviour {
     [SerializeField]
     float spriteSize;
 
+    Rigidbody2D rigid;
+
     void Awake() {
         //spriteSize = 57.6f;
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate() {
@@ -23,9 +26,10 @@ public class Background : MonoBehaviour {
     }
     void Update() {
         BackgroundScrolling();
-        Vector2 curPos = transform.position;
-        Vector2 nextPos = new Vector2(player.H, 0) * speed * Time.deltaTime;
-        transform.position = curPos + nextPos;
+        //Vector2 curPos = transform.position;
+        Vector2 nextPos = new Vector2(player.H * player.ApplySpeed, 0) * (speed * 0.2f);
+        //transform.position = curPos + nextPos;
+        rigid.velocity = nextPos;
     }
 
     void BackgroundScrolling() {

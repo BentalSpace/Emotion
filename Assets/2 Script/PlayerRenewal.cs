@@ -42,6 +42,9 @@ public class PlayerRenewal : MonoBehaviour {
     private float slopeDownAngle;
     private float slopeDownAngleOld;
     private float applySpeed;
+    public float ApplySpeed {
+        get { return applySpeed; }
+    }
 
     private bool isSlope;
     private bool canJump;

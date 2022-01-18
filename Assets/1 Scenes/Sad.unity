@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53155371}
   - component: {fileID: 53155372}
+  - component: {fileID: 53155373}
   m_Layer: 0
   m_Name: back land
   m_TagString: Untagged
@@ -339,6 +340,27 @@ MonoBehaviour:
   - {fileID: 2085381549}
   player: {fileID: 395336050}
   spriteSize: 96
+--- !u!50 &53155373
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53155370}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &110200325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547106085}
   - component: {fileID: 547106086}
+  - component: {fileID: 547106087}
   m_Layer: 0
   m_Name: tree
   m_TagString: Untagged
@@ -1420,6 +1443,27 @@ MonoBehaviour:
   - {fileID: 1903286076}
   player: {fileID: 395336050}
   spriteSize: 96
+--- !u!50 &547106087
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547106084}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &558097416
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348205634}
   - component: {fileID: 1348205635}
+  - component: {fileID: 1348205636}
   m_Layer: 0
   m_Name: bush
   m_TagString: Untagged
@@ -3093,6 +3138,27 @@ MonoBehaviour:
   - {fileID: 2110816192}
   player: {fileID: 395336050}
   spriteSize: 96
+--- !u!50 &1348205636
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348205633}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1357014090
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,6 +3484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1518686431}
   - component: {fileID: 1518686432}
+  - component: {fileID: 1518686433}
   m_Layer: 0
   m_Name: back tree
   m_TagString: Untagged
@@ -3463,6 +3530,27 @@ MonoBehaviour:
   - {fileID: 1097914945}
   player: {fileID: 395336050}
   spriteSize: 96
+--- !u!50 &1518686433
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518686430}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1552406738
 GameObject:
   m_ObjectHideFlags: 0
@@ -7091,6 +7179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2076500530}
   - component: {fileID: 2076500531}
+  - component: {fileID: 2076500532}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -7136,6 +7225,27 @@ MonoBehaviour:
   - {fileID: 255190045}
   player: {fileID: 395336050}
   spriteSize: 96
+--- !u!50 &2076500532
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076500529}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2085381548
 GameObject:
   m_ObjectHideFlags: 0
