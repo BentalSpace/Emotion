@@ -26,12 +26,8 @@ public class Background : MonoBehaviour {
     }
     void Update() {
         BackgroundScrolling();
-        //Vector2 curPos = transform.position;
-        Vector2 nextPos = new Vector2(player.H * player.ApplySpeed, 0) * (speed * 0.2f);
-        //transform.position = curPos + nextPos;
-        rigid.velocity = nextPos;
+        BackgroundMove();
     }
-
     void BackgroundScrolling() {
         //무한 배경
         if (Camera.main.transform.position.x >= sprites[frontSprite].position.x + 3) {
@@ -51,6 +47,17 @@ public class Background : MonoBehaviour {
             int backSpriteSave = backSprite;
             backSprite = frontSprite;
             frontSprite = backSpriteSave + 1 == 3 ? 0 : backSpriteSave + 1;
+        }
+    }
+    void BackgroundMove() {
+        if (Mathf.Abs(player.GetComponent<Rigidbody2D>().velocity.x) > 1) {
+            //Vector2 curPos = transform.position;
+            Vector2 nextPos = new Vector2(player.H * player.ApplySpeed, 0) * (speed * 0.2f);
+            //transform.position = curPos + nextPos;
+            rigid.velocity = nextPos;
+        }
+        else {
+            rigid.velocity = new Vector2(0, 0);
         }
     }
 }
