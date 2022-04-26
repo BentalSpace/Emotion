@@ -17,7 +17,6 @@ public class Background : MonoBehaviour {
     Rigidbody2D rigid;
 
     void Awake() {
-        //spriteSize = 57.6f;
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -28,6 +27,7 @@ public class Background : MonoBehaviour {
         BackgroundScrolling();
         BackgroundMove();
     }
+
     void BackgroundScrolling() {
         //무한 배경
         if (Camera.main.transform.position.x >= sprites[frontSprite].position.x + 3) {

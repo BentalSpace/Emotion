@@ -24,8 +24,9 @@ public class UIManager : MonoBehaviour {
     }
 
     public void StartBtnClick() {
-        SceneManager.LoadScene(1);
         // 프롤로그 시작 코드
+        SceneManager.LoadScene(1);
+
     }
     public void ContinueBtnClick() {
         onOffUI.SetActive(true);

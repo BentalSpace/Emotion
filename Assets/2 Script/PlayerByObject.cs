@@ -8,13 +8,15 @@ public class PlayerByObject : MonoBehaviour
     [SerializeField]
     PlayerRenewal player;
     [SerializeField]
-    CamerMove cameraMove;
+    CameraMove cameraMove;
     [SerializeField]
     Fairy fairy;
     [SerializeField]
     GameObject seedling;
     [SerializeField]
     GameObject downFairy;
+    [SerializeField]
+    GameObject seedlingDialouge;
 
     int index;
     float[] targetPosX;
@@ -24,7 +26,6 @@ public class PlayerByObject : MonoBehaviour
 
     IEnumerator dieCoroutine;
     IEnumerator plantCoroutine;
-
 
     Animator animator;
     Rigidbody2D rigid;
@@ -37,9 +38,11 @@ public class PlayerByObject : MonoBehaviour
 
         plantCoroutine = PlantATree();
     }
+
     private void Update() {
         charMove();
     }
+
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag == "animationStart" && !coroutineRun) {
             player.dontInput = true;
@@ -48,37 +51,54 @@ public class PlayerByObject : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "animationStart" && !coroutineRun)
+        {
+            player.dontInput = true;
+            StartCoroutine(plantCoroutine);
+            Destroy(collision.gameObject);
+        }
+    }
+
     IEnumerator PlantATree() {
-        index = 0;
         animator.SetBool("isWalk", false);
+        yield return new WaitForSeconds(1.0f);
+        index = 0;
         coroutineRun = true;
         rigid.sharedMaterial = null;
         move = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.0f);
         seedling.SetActive(true);
         index = 1;
-        yield return new WaitForSeconds(2f);
-        cameraMove.animMove = true;
-        yield return new WaitForSeconds(2f);
-        move = true;
-        yield return new WaitForSeconds(3f);
-        downFairy.SetActive(false);
-        //fairy.animMove = true;
-        fairy.StartCoroutine("AnimMove1");
 
-        yield return new WaitForSeconds(2.5f);
+        #region 요정 애니메이션 주석처리
+        // yield return new WaitForSeconds(2f);
+        // cameraMove.animMove = true;
+        // yield return new WaitForSeconds(2f);
+        // move = true;
+        // yield return new WaitForSeconds(3f);
+        // downFairy.SetActive(false);
+        // fairy.animMove = true;
+        #endregion
+
+        yield return new WaitForSeconds(1.0f);
+        player.dontInput = true;
+        animator.SetBool("isWalk", false);
+
+        yield return new WaitForSeconds(1.0f);
         player.dontInput = false;
-        animator.SetBool("isSit", false);
         coroutineRun = false;
     }
+
     void charMove() {
         if (!move)
             return;
         animator.SetTrigger("sitTrigger");
         animator.SetBool("isSit", false);
         animator.SetBool("isWalk", true);
-        rigid.velocity = new Vector2(player.MaxSpeed, rigid.velocity.y);
+        rigid.velocity = new Vector2(player.ApplySpeed, rigid.velocity.y);
         if (gameObject.transform.position.x >= targetPosX[index]) {
             move = false;
             animator.SetBool("isWalk", false);

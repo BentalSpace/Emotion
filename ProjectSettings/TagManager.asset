@@ -9,7 +9,11 @@ TagManager:
   - nextChapter
   - stageSave
   - animationStart
-  - skill
+  - Object
+  - Warp
+  - Out
+  - Skill
+  - ThrowObject
   layers:
   - Default
   - TransparentFX
@@ -20,9 +24,9 @@ TagManager:
   - Player
   - Platform
   - Obstacle
-  - Platform2
-  - 
-  - 
+  - Object
+  - PassObject
+  - SitPassObject
   - 
   - 
   - 
@@ -46,4 +50,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2551578065
     locked: 0
