@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPassObject: 1
   player: {fileID: 0}
-  objectName: Cloud XY
+  WhatIsObjectName: 6
   anim: {fileID: 2002728944706882379}
   mushroomJumpXPower: 0
   mushroomJumpYPower: 0

@@ -492,12 +492,17 @@ public class PlayerRenewal : MonoBehaviour {
         coroutineRun = true;
         dontInput = true;
         yield return new WaitForSeconds(2f);
-        coroutineRun = false;
 
-        GameObject chapterStage = GameObject.Find("StageManager");
-        chapterStage.name = "StageNum";
-        SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 1);
-        DontDestroyOnLoad(chapterStage);
+        //GameObject chapterStage = GameObject.Find("StageManager");
+        //chapterStage.name = "StageNum";
+        GameObject chapterStage = GameObject.Find(sm.ChapterStageNum);
+        gameObject.transform.position = chapterStage.transform.position;
+        //SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 1);
+        //DontDestroyOnLoad(chapterStage);
+        Anim.SetTrigger("resTrigger");
+        dontInput = false;
+
+        coroutineRun = false;
     }
 
     private void OnDrawGizmos() {

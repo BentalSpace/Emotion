@@ -39,11 +39,20 @@ public class CameraMove : MonoBehaviour
     }
 
     void cameraMove() {
-        if (player.transform.position.x <= leftMax || animMove)
+        if (animMove)
             return;
-        if (player.transform.position.x >= rightMax || animMove)
-            return;
-        cameraPos = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        if (player.transform.position.x <= leftMax) {
+            Debug.Log("왼쪽 끝");
+            cameraPos = new Vector3(leftMax, transform.position.y, transform.position.z);
+        }
+        else if (player.transform.position.x >= rightMax) {
+            Debug.Log("오른쪽 끝");
+            cameraPos = new Vector3(rightMax, transform.position.y, transform.position.z);
+        }
+        else {
+            Debug.Log("카메라 이동");
+            cameraPos = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        }
         transform.position = cameraPos;
     }
     void highMapMove() {
@@ -51,19 +60,19 @@ public class CameraMove : MonoBehaviour
             return;
         if(player.transform.position.y > startHighMove) {
             if (cameraYMax >= transform.position.y && cameraYMin <= transform.position.y) {
-                cameraPos = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+                cameraPos = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
                 transform.position = cameraPos;
             }
         }
 
         //카메라가 필요이상 아래로 갔을때
         if (cameraYMin > transform.position.y) {
-            cameraPos = new Vector3(player.transform.position.x, cameraYMin, transform.position.z);
+            cameraPos = new Vector3(transform.position.x, cameraYMin, transform.position.z);
             transform.position = cameraPos;
         }
         //카메라가 필요이상 위로 갔을때
         if(cameraYMax < transform.position.y) {
-            cameraPos = new Vector3(player.transform.position.x, cameraYMax, transform.position.z);
+            cameraPos = new Vector3(transform.position.x, cameraYMax, transform.position.z);
             transform.position = cameraPos;
         }
     }

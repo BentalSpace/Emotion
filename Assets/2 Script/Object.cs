@@ -1,13 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Object : MonoBehaviour {
+    enum objectName { TreeGrow, Branch3, Branch1_8, HotStone, Ceramic, Mushroom, CloudX, CloudY, SadPail, SadHotStoneSadEnd }
     [SerializeField]
     bool isPassObject;
     [SerializeField]
     PlayerRenewal player;
     [SerializeField]
-    string objectName;
+    objectName WhatIsObjectName;
     [SerializeField]
     Animator anim;
     [SerializeField]
@@ -24,6 +26,8 @@ public class Object : MonoBehaviour {
     GameObject setActiveObject;
     [SerializeField]
     BoxCollider2D boxCollider;
+    [SerializeField]
+    Sprite changeImage;
     //마지막 위치에 둘것
     [SerializeField]
     GameObject[] needGameObject;
@@ -31,9 +35,9 @@ public class Object : MonoBehaviour {
     bool isPowerOn;
     bool puzzleReady;
 
-    public string Name {
-        get { return objectName; }
-    }
+    //public objectName Name {
+    //    get { return WhatIsObjectName; }
+    //}
 
 
 
@@ -69,36 +73,38 @@ public class Object : MonoBehaviour {
     public void Skill() {
         if (isPowerOn)
             return;
-        switch (objectName) {
-            case "Tree grow":
+        switch (WhatIsObjectName) {
+            case objectName.TreeGrow:
                 StartCoroutine(TreeGrowAnimation());
                 isPowerOn = true;
                 //StartCoroutine(AnimationReturn(3f));
                 break;
-            case "Branch 3":
+            case objectName.Branch3:
                 anim.SetTrigger("skill 3");
                 isPowerOn = true;
                 StartCoroutine(AnimationReturn(5f));
                 break;
-            case "Branch 1.8":
+            case objectName.Branch1_8:
                 anim.SetTrigger("skill 1.8");
                 isPowerOn = true;
                 StartCoroutine(AnimationReturn(5f));
                 break;
-            case "Hot Stone":
+            case objectName.HotStone:
                 setActiveObject.SetActive(true);
                 isPowerOn = true;
                 break;
-            case "Ceramic":
+            case objectName.Ceramic:
                 StartCoroutine(DownObjects());
                 break;
             //슬픔 마지막 컷신 능력
-            case "Pail":
+            case objectName.SadPail:
                 puzzleReady = true;
+                gameObject.GetComponent<SpriteRenderer>().sprite = changeImage;
                 break;
-            case "Hot Stone Sad End":
-                //if (!needGameObject[3].GetComponent<Object>().puzzleReady)
-                //    break;
+            case objectName.SadHotStoneSadEnd:
+                if (!needGameObject[3].GetComponent<Object>().puzzleReady)
+                    break;
+                Debug.Log("Test");
                 StopCoroutine(SadEndEvent());
                 StartCoroutine(SadEndEvent());
                 break;
@@ -106,17 +112,17 @@ public class Object : MonoBehaviour {
     }
     public void ObjectAbility(Transform target, PlayerRenewal player) {
         //플레이어가 오브젝트 닿는게 트리거인 경우
-        switch (objectName) {
-            case "Mushroom":
+        switch (WhatIsObjectName) {
+            case objectName.Mushroom:
                 StartCoroutine(SuperJump(target, player));
                 break;
-            case "Cloud X":
+            case objectName.CloudX:
                 //켜져있으면 리턴
                 if (isPowerOn)
                     return;
                 StartCoroutine(CloudMove("X"));
                 break;
-            case "Cloud Y":
+            case objectName.CloudY:
                 //켜져있으면 리턴
                 if (isPowerOn)
                     return;
@@ -357,10 +363,11 @@ public class Object : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "ThrowObject") {
-            Destroy(collision.gameObject);
+            Debug.Log("TTTEst");
             if (gameObject.tag == "Skill") {
                 Skill();
             }
+            ObjectManager.Instance.ReturnObject(collision.gameObject, "waterBall");
         }
     }
 }

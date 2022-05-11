@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class FairyAbility : MonoBehaviour {
     [SerializeField]
@@ -39,8 +40,12 @@ public class FairyAbility : MonoBehaviour {
         if (!sading) {
             if (sadD) {
                 player.dontInput = true;
-                waterBall = Instantiate(sadAbility, transform.position, transform.rotation);
-                arrow = Instantiate(arrowObj, transform.position, transform.rotation);
+                waterBall = ObjectManager.Instance.GetObject("waterBall");
+                waterBall.transform.position = transform.position;
+                waterBall.tag = "Untagged";
+                arrow = ObjectManager.Instance.GetObject("arrow");
+                arrow.transform.position = transform.position;
+
                 waterRigid = waterBall.GetComponent<Rigidbody2D>();
                 maxRotation = 80;
                 minRotation = 30;
@@ -63,7 +68,8 @@ public class FairyAbility : MonoBehaviour {
                 waterBall.tag = "ThrowObject";
                 waterRigid.bodyType = RigidbodyType2D.Dynamic;
                 waterRigid.AddRelativeForce(transform.up * 20, ForceMode2D.Impulse);
-                Destroy(arrow);
+                StartCoroutine(ReturnWaterBall(waterBall));
+                ObjectManager.Instance.ReturnObject(arrow, "arrow");
                 sading = false;
                 player.dontInput = false;
             }
@@ -96,4 +102,8 @@ public class FairyAbility : MonoBehaviour {
         }
     }
 
+    IEnumerator ReturnWaterBall(GameObject obj) {
+        yield return new WaitForSeconds(10f);
+        ObjectManager.Instance.ReturnObject(obj, "waterBall");
+    }
 }
