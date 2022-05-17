@@ -1,28 +1,22 @@
 fileFormatVersion: 2
-guid: e24d95d52dd966e438d16f210086c188
+guid: ab29e8928c6de1e4ca0db20e20e9a25b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1936848587568031313
-    second: WildBoar nose_0
+      213: 2584946903388588973
+    second: WildBoar_Stand2__0
   - first:
-      213: 4171611007191796492
-    second: WildBoar nose_1
+      213: -201884500008082637
+    second: WildBoar_Stand2__1
   - first:
-      213: -763834923643661677
-    second: WildBoar nose_2
+      213: 1597331743213045006
+    second: WildBoar_Stand2__2
   - first:
-      213: 8844304748426878061
-    second: WildBoar nose_3
+      213: -2171754275151606112
+    second: WildBoar_Stand2__3
   - first:
-      213: 618073519770988032
-    second: WildBoar nose_4
-  - first:
-      213: 1629293104898054940
-    second: WildBoar nose_5
-  - first:
-      213: 3298034285959057586
-    second: WildBoar nose_6
+      213: -90345712766466208
+    second: WildBoar_Stand2__4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,34 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WildBoar nose_0
+      name: WildBoar_Stand2__0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 386
-        height: 295
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 156a5bd478111ea10800000000000000
-      internalID: 1936848587568031313
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar nose_1
-      rect:
-        serializedVersion: 2
-        x: 451
-        y: 0
+        x: 0
+        y: 2
         width: 384
-        height: 295
+        height: 297
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +120,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0bc6c0eb1a84e930800000000000000
-      internalID: 4171611007191796492
+      spriteID: dab09b353839fd320800000000000000
+      internalID: 2584946903388588973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WildBoar nose_2
+      name: WildBoar_Stand2__1
       rect:
         serializedVersion: 2
-        x: 888
-        y: 0
-        width: 385
-        height: 295
+        x: 457
+        y: 4
+        width: 386
+        height: 293
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,18 +141,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3929e251f205665f0800000000000000
-      internalID: -763834923643661677
+      spriteID: 3336c5bed13c23df0800000000000000
+      internalID: -201884500008082637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WildBoar nose_3
+      name: WildBoar_Stand2__2
       rect:
         serializedVersion: 2
-        x: 1306
-        y: 0
+        x: 902
+        y: 8
+        width: 384
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e054ba6e1ccda2610800000000000000
+      internalID: 1597331743213045006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WildBoar_Stand2__3
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 3
         width: 387
         height: 295
       alignment: 7
@@ -189,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6cd84f3f484dba70800000000000000
-      internalID: 8844304748426878061
+      spriteID: 0ae07224ef06cd1e0800000000000000
+      internalID: -2171754275151606112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WildBoar nose_4
+      name: WildBoar_Stand2__4
       rect:
         serializedVersion: 2
-        x: 1765
-        y: 0
-        width: 394
-        height: 295
+        x: 1773
+        y: 3
+        width: 427
+        height: 294
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,50 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00e660f6796d39800800000000000000
-      internalID: 618073519770988032
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar nose_6
-      rect:
-        serializedVersion: 2
-        x: 2194
-        y: 0
-        width: 386
-        height: 295
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2b016a795b8f4cd20800000000000000
-      internalID: 3298034285959057586
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar nose_5
-      rect:
-        serializedVersion: 2
-        x: 2186
-        y: 63
-        width: 22
-        height: 18
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c1b117052796c9610800000000000000
-      internalID: 1629293104898054940
+      spriteID: 067439b8d070fbef0800000000000000
+      internalID: -90345712766466208
       vertices: []
       indices: 
       edges: []

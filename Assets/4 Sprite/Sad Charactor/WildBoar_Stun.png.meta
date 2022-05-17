@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: f5979872017223344b0c37209b15fbea
+guid: 3e7693f0f4622984ba851cb202901456
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7962612797348645060
-    second: WildBoar_Stand3_0
+      213: 1292033419825665359
+    second: WildBoar_Stun_0
   - first:
-      213: 1224420269556706748
-    second: WildBoar_Stand3_1
+      213: 2387648735430687865
+    second: WildBoar_Stun_1
   - first:
-      213: 1749059798628321010
-    second: WildBoar_Stand3_2
+      213: -5024789883112909779
+    second: WildBoar_Stun_2
   - first:
-      213: 5945105302098023057
-    second: WildBoar_Stand3_3
+      213: -5101276897776504971
+    second: WildBoar_Stun_3
   - first:
-      213: -3698302742210200665
-    second: WildBoar_Stand3_4
+      213: -8359747269307737155
+    second: WildBoar_Stun_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,106 +106,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WildBoar_Stand3_0
+      name: WildBoar_Stun_0
       rect:
         serializedVersion: 2
         x: 0
         y: 2
-        width: 280
+        width: 385
+        height: 296
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4554a2cc893ee110800000000000000
+      internalID: 1292033419825665359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WildBoar_Stun_1
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 0
+        width: 430
+        height: 300
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97cb1c3efd1a22120800000000000000
+      internalID: 2387648735430687865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WildBoar_Stun_2
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 2
+        width: 441
+        height: 253
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24141a493c544ab0800000000000000
+      internalID: -5024789883112909779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WildBoar_Stun_3
+      rect:
+        serializedVersion: 2
+        x: 1453
+        y: 4
+        width: 477
         height: 214
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c802f5c622e08e60800000000000000
-      internalID: 7962612797348645060
+      spriteID: 57fef1f60bf9439b0800000000000000
+      internalID: -5101276897776504971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WildBoar_Stand3_1
+      name: WildBoar_Stun_4
       rect:
         serializedVersion: 2
-        x: 338
+        x: 1994
         y: 3
-        width: 278
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 506
+        height: 198
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbd27b67fb30ef010800000000000000
-      internalID: 1224420269556706748
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar_Stand3_2
-      rect:
-        serializedVersion: 2
-        x: 656
-        y: 7
-        width: 280
-        height: 205
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f64824be98e54810800000000000000
-      internalID: 1749059798628321010
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar_Stand3_3
-      rect:
-        serializedVersion: 2
-        x: 972
-        y: 3
-        width: 278
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19218d316c1418250800000000000000
-      internalID: 5945105302098023057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WildBoar_Stand3_4
-      rect:
-        serializedVersion: 2
-        x: 1293
-        y: 3
-        width: 278
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ab35ba104dfcacc0800000000000000
-      internalID: -3698302742210200665
+      spriteID: dbbded086263cfb80800000000000000
+      internalID: -8359747269307737155
       vertices: []
       indices: 
       edges: []

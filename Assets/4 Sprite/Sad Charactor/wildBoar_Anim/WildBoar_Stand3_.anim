@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: wildBoar_stand2
+  m_Name: WildBoar_Stand3_
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,15 +20,15 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -3917249255375372773, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+      value: {fileID: 290101746887497090, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
     - time: 0.083333336
-      value: {fileID: 4140994181061261737, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+      value: {fileID: -5278032705037494914, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
     - time: 0.16666667
-      value: {fileID: -1549378224437622382, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+      value: {fileID: -8037838177506258936, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
     - time: 0.25
-      value: {fileID: -8082761839586200993, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+      value: {fileID: -6419722387936320767, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
     - time: 0.33333334
-      value: {fileID: 3304871783542042108, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+      value: {fileID: 7481604712667028934, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,11 +48,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -3917249255375372773, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
-    - {fileID: 4140994181061261737, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
-    - {fileID: -1549378224437622382, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
-    - {fileID: -8082761839586200993, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
-    - {fileID: 3304871783542042108, guid: 4922d3b755ca0bd4d9280ed0cd2ccf39, type: 3}
+    - {fileID: 290101746887497090, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
+    - {fileID: -5278032705037494914, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
+    - {fileID: -8037838177506258936, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
+    - {fileID: -6419722387936320767, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
+    - {fileID: 7481604712667028934, guid: 67d72e72d30be2a459c89ada430c6f42, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

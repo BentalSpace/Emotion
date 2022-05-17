@@ -46,11 +46,11 @@ public class WildBoar : MonoBehaviour
             rigid.velocity = new Vector2(randDis * 3, rigid.velocity.y);
 
             //앞에 벽이 있다면 반대로 이동
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector2.right, (spriteRenderer.flipX ? 4 : -20), LayerMask.GetMask("Platform"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up * 1.5f, Vector2.right, (spriteRenderer.flipX ? 4 : -20), LayerMask.GetMask("Platform"));
             if (hit && !isChase) {
                 randDis = spriteRenderer.flipX ? -1 : 1;
                 spriteRenderer.flipX = !spriteRenderer.flipX;
-                attackBox.offset = spriteRenderer.flipX ? new Vector2(0.68f, 0.1f) : new Vector2(-0.56f, 0.1f);
+                attackBox.offset = spriteRenderer.flipX ? new Vector2(0.68f, 1.57f) : new Vector2(-0.56f, 1.57f);
             }
 
             if (!isPlay && !isHit && !isChase)
@@ -69,11 +69,11 @@ public class WildBoar : MonoBehaviour
 
         if (randDis >= 1) {
             spriteRenderer.flipX = true;
-            attackBox.offset = new Vector2(0.68f, 0.1f);
+            attackBox.offset = new Vector2(0.68f, 1.57f);
         }
         else if(randDis <= -1) {
             spriteRenderer.flipX = false;
-            attackBox.offset = new Vector2(-0.56f, 0.1f);
+            attackBox.offset = new Vector2(-0.56f, 1.57f);
         }
         float playTime = Random.Range(2f, 4f);
 
@@ -92,8 +92,8 @@ public class WildBoar : MonoBehaviour
     }
     void PlayerChase() {
         //앞에 플레이어가 있다면 플레이어를 향해 달림
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector3.right, (spriteRenderer.flipX ? 18 : -18), LayerMask.GetMask("Player"));
-        Debug.DrawRay(transform.position + Vector3.down * 0.8f, Vector3.right * (spriteRenderer.flipX ? 18 : -18), Color.white);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up * 1.5f, Vector3.right, (spriteRenderer.flipX ? 18 : -18), LayerMask.GetMask("Player"));
+        Debug.DrawRay(transform.position + Vector3.up * 1.5f, Vector3.right * (spriteRenderer.flipX ? 18 : -18), Color.white);
 
         if (hit && !isHit) {
             isChase = true;
@@ -150,15 +150,15 @@ public class WildBoar : MonoBehaviour
                 switch (nowHit) {
                     case 0:
                         HitNextReady(0.8f);
-                        anim.SetTrigger("stand1");
+                        anim.SetTrigger("stand2");
                         break;
                     case 1:
                         HitNextReady(1.2f);
-                        anim.SetTrigger("stand2");
+                        anim.SetTrigger("stand3");
                         break;
                     case 2:
                         HitNextReady(1.2f);
-                        anim.SetTrigger("stand3");
+                        anim.SetTrigger("stun");
                         break;
                     default:
                         Debug.Log("멧돼지 Hit 관련 부분 에러");
@@ -167,7 +167,7 @@ public class WildBoar : MonoBehaviour
             }
             if (maxHit <= nowHit) {
                 // 퍼즐 클리어
-                anim.SetTrigger("stand3");
+                anim.SetTrigger("stun");
                 isClear = true;
                 Debug.Log("Clear");
             }
