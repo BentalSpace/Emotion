@@ -42,15 +42,12 @@ public class CameraMove : MonoBehaviour
         if (animMove)
             return;
         if (player.transform.position.x <= leftMax) {
-            Debug.Log("왼쪽 끝");
             cameraPos = new Vector3(leftMax, transform.position.y, transform.position.z);
         }
         else if (player.transform.position.x >= rightMax) {
-            Debug.Log("오른쪽 끝");
             cameraPos = new Vector3(rightMax, transform.position.y, transform.position.z);
         }
         else {
-            Debug.Log("카메라 이동");
             cameraPos = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
         }
         transform.position = cameraPos;

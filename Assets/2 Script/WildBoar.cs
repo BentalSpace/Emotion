@@ -11,6 +11,8 @@ public class WildBoar : MonoBehaviour
 
     bool isPlay;
     bool isClear;
+    bool isHit;
+    bool isChase;
 
     float randDis;
     float dis;
@@ -30,6 +32,7 @@ public class WildBoar : MonoBehaviour
         //Debug.DrawRay(transform.position + Vector3.down * 0.8f, Vector2.right * (spriteRenderer.flipX ? 4 : -4), Color.magenta);
     }
     void FixedUpdate() {
+        Debug.Log(isChase);
         if (isClear) {
             //passObject로 변경해서 더이상 플레이어와 작용하지 않게 함
             attackBox.gameObject.layer = 10;
@@ -42,15 +45,15 @@ public class WildBoar : MonoBehaviour
 
             rigid.velocity = new Vector2(randDis * 3, rigid.velocity.y);
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector2.right, (spriteRenderer.flipX ? 4 : -4), LayerMask.GetMask("Platform"));
-
-            if (hit) {
+            //앞에 벽이 있다면 반대로 이동
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector2.right, (spriteRenderer.flipX ? 4 : -20), LayerMask.GetMask("Platform"));
+            if (hit && !isChase) {
                 randDis = spriteRenderer.flipX ? -1 : 1;
                 spriteRenderer.flipX = !spriteRenderer.flipX;
                 attackBox.offset = spriteRenderer.flipX ? new Vector2(0.68f, 0.1f) : new Vector2(-0.56f, 0.1f);
             }
 
-            if (!isPlay)
+            if (!isPlay && !isHit && !isChase)
                 Think();
         }
         else {
@@ -88,13 +91,31 @@ public class WildBoar : MonoBehaviour
         isPlay = false;
     }
     void PlayerChase() {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector3.right, (spriteRenderer.flipX ? 10 : -10), LayerMask.GetMask("Player"));
-        Debug.DrawRay(transform.position + Vector3.down * 0.8f, Vector3.right * (spriteRenderer.flipX ? 10 : -10), Color.white);
+        //앞에 플레이어가 있다면 플레이어를 향해 달림
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.down * 0.8f, Vector3.right, (spriteRenderer.flipX ? 18 : -18), LayerMask.GetMask("Player"));
+        Debug.DrawRay(transform.position + Vector3.down * 0.8f, Vector3.right * (spriteRenderer.flipX ? 18 : -18), Color.white);
 
-        if (hit) {
-            randDis = (spriteRenderer.flipX ? 1.5f : -1.5f);
+        if (hit && !isHit) {
+            isChase = true;
+            switch (nowHit) {
+                case 0:
+                    randDis = (spriteRenderer.flipX ? 2.5f : -2.5f);
+                    break;
+                case 1:
+                    randDis = (spriteRenderer.flipX ? 1.8f : -1.8f);
+                    break;
+                case 2:
+                    randDis = (spriteRenderer.flipX ? 0.8f : -0.8f);
+                    break;
+                default:
+                    randDis = (spriteRenderer.flipX ? 0f : 0f);
+                    break;
+            }
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("WildBoar run"))
                 anim.SetTrigger("run");
+        }
+        else if (!hit) {
+            isChase = false;
         }
     }
     void OnCollisionEnter2D(Collision2D collision) {
@@ -103,16 +124,54 @@ public class WildBoar : MonoBehaviour
 
             player.Rigid.AddForce(new Vector2(randDis * 10, 10), ForceMode2D.Impulse);
         }
+
+    }
+    void HitNextReady(float delayTime) {
+        isHit = true;
+        isPlay = false;
+        CancelInvoke();
+        nowHit++;
+        randDis = 0;
+        StartCoroutine(HitNextThinkOrChase(delayTime));
+    }
+    IEnumerator HitNextThinkOrChase(float delayTime) {
+        yield return new WaitForSeconds(delayTime);
+        isHit = false;
         
+        if(!isClear && !isChase)
+            //추격중이 아니였다면, 생각을 하고,  || 추격중이였다면 하던 추격 계속 해라
+            Think();
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "ThrowObject") {
             //퍼즐 해방 조건
-            Destroy(collision.gameObject);
-            if (maxHit <= ++nowHit) {
-                anim.SetTrigger("nose");
-                isClear = true;
+            if (!isHit) {
+                ObjectManager.Instance.ReturnObject(collision.gameObject, "waterBall");
+                switch (nowHit) {
+                    case 0:
+                        HitNextReady(0.8f);
+                        anim.SetTrigger("stand1");
+                        break;
+                    case 1:
+                        HitNextReady(1.2f);
+                        anim.SetTrigger("stand2");
+                        break;
+                    case 2:
+                        HitNextReady(1.2f);
+                        anim.SetTrigger("stand3");
+                        break;
+                    default:
+                        Debug.Log("멧돼지 Hit 관련 부분 에러");
+                        break;
+                }
             }
+            if (maxHit <= nowHit) {
+                // 퍼즐 클리어
+                anim.SetTrigger("stand3");
+                isClear = true;
+                Debug.Log("Clear");
+            }
+            Debug.Log(nowHit);
         }
     }
 }

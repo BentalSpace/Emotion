@@ -19,7 +19,6 @@ public class CloudManager : MonoBehaviour
     }
 
     void CreateCloud() {
-        Debug.Log("CreateCloud ½ÇÇà");
         int rand = Random.Range(0, 3);
         int rand2 = Random.Range(0, 2);
 

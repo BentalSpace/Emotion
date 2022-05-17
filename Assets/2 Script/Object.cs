@@ -151,12 +151,16 @@ public class Object : MonoBehaviour {
     IEnumerator TreeGrowAnimation() {
         // 나무가 커진다.
         anim.SetTrigger("Start");
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(player.transform.position.x + 0.1f, player.transform.position.y + 0.3f), Vector3.down, 1f);
+        bool playerUp = hit.collider.tag == "Tree";
         yield return new WaitForSeconds(1f);
         boxCollider.offset = new Vector2(boxCollider.offset.x, 2.03f);
-        player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1.3f);
+        if (playerUp)
+            player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1.3f);
         yield return new WaitForSeconds(1f);
         boxCollider.offset = new Vector2(boxCollider.offset.x, 3.28f);
-        player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1.95f);
+        if (playerUp)
+            player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1.95f);
 
         //나무가 작아진다.
         yield return new WaitForSeconds(3f);

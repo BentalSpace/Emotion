@@ -107,6 +107,9 @@ public class ObjectManager : MonoBehaviour
         }
         Queue<GameObject> targetPool = SearchQueue(name);
 
+        if (name.Equals("waterBall")) {
+            obj.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        }
         targetPool.Enqueue(obj);
         obj.transform.position = Vector2.zero;
         obj.transform.rotation = Quaternion.identity;

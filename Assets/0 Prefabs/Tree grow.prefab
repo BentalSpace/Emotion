@@ -47,14 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPassObject: 1
   player: {fileID: 0}
-  objectName: Tree grow
+  WhatIsObjectName: 0
   anim: {fileID: 5180411314425328503}
   mushroomJumpXPower: 0
   mushroomJumpYPower: 0
+  speed: 0
   cloudMoveStartPos: 0
   cloudMoveEndPos: 0
   setActiveObject: {fileID: 0}
   boxCollider: {fileID: 5180411314425328501}
+  changeImage: {fileID: 0}
   needGameObject: []
 --- !u!58 &5180411314234878497
 CircleCollider2D:
@@ -86,7 +88,7 @@ GameObject:
   - component: {fileID: 5180411314425328501}
   m_Layer: 10
   m_Name: sprite
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
