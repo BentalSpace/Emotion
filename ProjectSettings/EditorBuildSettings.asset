@@ -5,22 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 Scenes/0 Main.unity
     guid: 3c04fd1a533dd6745bc5bbe5a1a8f2ba
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 Scenes/1 Prologue 1.unity
     guid: 7b8a4ea91105ef149908ec1615e8d803
   - enabled: 1
     path: Assets/1 Scenes/Sad.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 Scenes/Horror.unity
     guid: 93ecdb935d0f6964e8a270597c1941c4
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 Scenes/3 Prologue 2.unity
     guid: 5ba18d515a2cfe24cb89788beae1a62c
-  - enabled: 1
+  - enabled: 0
     path: Assets/1 Scenes/2 House.unity
     guid: b0b2d89bb6e22e84fbf9bcd3ac6eb4a1
   m_configObjects: {}
