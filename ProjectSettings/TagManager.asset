@@ -15,6 +15,7 @@ TagManager:
   - Skill
   - ThrowObject
   - Tree
+  - Mask
   layers:
   - Default
   - TransparentFX

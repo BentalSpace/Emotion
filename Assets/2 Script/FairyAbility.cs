@@ -28,18 +28,22 @@ public class FairyAbility : MonoBehaviour {
         Skill();
     }
     void SkillDownCheck() {
-        if (!GameManager.playerAbilityOn) {
+        if (!GameManager.manager.playerAbilityOn) {
             sadD = Input.GetButtonDown("Sad");
         }
-        else if(GameManager.playerAbilityOn) {
+        else if(GameManager.manager.playerAbilityOn) {
             sadD = false;
             sading = false;
         }
     }
     void Skill() {
-        if (!sading) {
+        //슬픔 요정능력
+        if (!sading && (player.abilityCurGauge >= player.abilityMaxGauge || GameManager.manager.haveSadMask)) {
             if (sadD) {
                 player.dontInput = true;
+                if (!GameManager.manager.haveSadMask) {
+                    player.abilityCurGauge = 0;
+                }
                 waterBall = ObjectManager.Instance.GetObject("waterBall");
                 waterBall.transform.position = transform.position;
                 waterBall.tag = "Untagged";

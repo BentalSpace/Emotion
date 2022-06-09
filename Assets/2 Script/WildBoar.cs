@@ -32,7 +32,6 @@ public class WildBoar : MonoBehaviour
         //Debug.DrawRay(transform.position + Vector3.down * 0.8f, Vector2.right * (spriteRenderer.flipX ? 4 : -4), Color.magenta);
     }
     void FixedUpdate() {
-        Debug.Log(isChase);
         if (isClear) {
             //passObject로 변경해서 더이상 플레이어와 작용하지 않게 함
             attackBox.gameObject.layer = 10;
@@ -143,7 +142,7 @@ public class WildBoar : MonoBehaviour
             Think();
     }
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "ThrowObject") {
+        if (collision.gameObject.tag == "ThrowObject" && !isClear) {
             //퍼즐 해방 조건
             if (!isHit) {
                 ObjectManager.Instance.ReturnObject(collision.gameObject, "waterBall");
@@ -167,7 +166,6 @@ public class WildBoar : MonoBehaviour
             }
             if (maxHit <= nowHit) {
                 // 퍼즐 클리어
-                anim.SetTrigger("stun");
                 isClear = true;
                 Debug.Log("Clear");
             }

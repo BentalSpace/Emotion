@@ -45,6 +45,8 @@ public class PlayerRenewal : MonoBehaviour {
     public float ApplySpeed {
         get { return applySpeed; }
     }
+    public float abilityCurGauge;
+    public float abilityMaxGauge;
 
     private bool isSlope;
     private bool canJump;
@@ -65,6 +67,7 @@ public class PlayerRenewal : MonoBehaviour {
     private bool sading;
     public bool isSuperJump;
     private bool test;
+    private bool windBlowing;
     public bool FlipX {
         get { return spriteRenderer.flipX; }
     }
@@ -118,6 +121,7 @@ public class PlayerRenewal : MonoBehaviour {
 
         dieCoroutine = Die();
         applySpeed = walkSpeed;
+        abilityMaxGauge = 5;
     }
     void Start() {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
@@ -166,6 +170,7 @@ public class PlayerRenewal : MonoBehaviour {
 
         SkillAnimation();
         SitObjectPass();
+
     }
     void FixedUpdate() {
         setHorizontal();
@@ -193,7 +198,7 @@ public class PlayerRenewal : MonoBehaviour {
         if (dontInput) {
             sadD = false;
         }
-        if (GameManager.playerAbilityOn) {
+        if (GameManager.manager.playerAbilityOn) {
             sadD = Input.GetButton("Sad");
         }
         else {
@@ -203,7 +208,10 @@ public class PlayerRenewal : MonoBehaviour {
     }
     void SkillAnimation() {
         if(sadD && !sading) {
-            animator.SetTrigger("noMaskSadTrigger");
+            if (!GameManager.manager.haveSadMask)
+                animator.SetTrigger("noMaskSadTrigger");
+            else
+                animator.SetTrigger("SadTrigger");
             sading = true;
             Invoke("sadOut", 2f);
         }
@@ -212,6 +220,8 @@ public class PlayerRenewal : MonoBehaviour {
         sading = false;
     }
     void PlusVelocity() {
+        // 플레이어의 바닥이 움직이는 바닥일때
+        plusVelocity = Vector2.zero;
         RaycastHit2D[] hits = Physics2D.RaycastAll(new Vector2(transform.position.x + 0.1f, transform.position.y + 1f), Vector2.down, 1f);
         Debug.DrawRay(new Vector2(transform.position.x + 0.1f, transform.position.y + 1f), Vector2.down * 1, Color.magenta);
         if (hits.Length > 0) {
@@ -220,10 +230,14 @@ public class PlayerRenewal : MonoBehaviour {
                     plusVelocity = Vector2.zero;
                 if (hit.collider.GetComponent<Rigidbody2D>() != null) {
                     Rigidbody2D hitRigid = hit.collider.GetComponent<Rigidbody2D>();
-                    plusVelocity = new Vector2(hitRigid.velocity.x, 0);
+                    plusVelocity += new Vector2(hitRigid.velocity.x, 0);
                     break;
                 }
             }
+        }
+        //오브젝트 "바람" 안에 있을때
+        if (windBlowing) {
+            plusVelocity += new Vector2(-2.8f, 0);
         }
     }
     void Move() {
@@ -254,7 +268,7 @@ public class PlayerRenewal : MonoBehaviour {
         isJumping = true;
         jumpEnd = false;
         //rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        rigid.velocity = new Vector2(applySpeed * h, jumpPower);
+        rigid.velocity = plusVelocity + new Vector2(applySpeed * h, jumpPower);
         animator.SetBool("isJumpPress", true);
     }
     void GroundCheck() {
@@ -341,6 +355,9 @@ public class PlayerRenewal : MonoBehaviour {
         else if (!Input.GetButton("Horizontal") && isGround) {
             rigid.sharedMaterial = fullFriction;
             animator.SetBool("isWalk", false);
+        }
+        if (windBlowing) {
+            rigid.sharedMaterial = noFriction;
         }
 
         //점프 값 변경
@@ -450,7 +467,6 @@ public class PlayerRenewal : MonoBehaviour {
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !coroutineRun) {
             //장애물과 부딪혔을때
-            animator.SetTrigger("dieTrigger");
             StartCoroutine(dieCoroutine);
         }
         if (collision.gameObject.tag == "stageSave") {
@@ -468,7 +484,31 @@ public class PlayerRenewal : MonoBehaviour {
         if (collision.gameObject.tag == "Object") {
             test = true;
             Object obj = collision.gameObject.GetComponent<Object>();
+            if (obj.Name == Object.objectName.Wind) {
+                windBlowing = true;
+                return;
+            }
             obj.ObjectAbility(transform, this);
+        }
+        if(collision.gameObject.tag == "Mask") {
+            //마스크 획득
+            if(collision.gameObject.GetComponent<Mask>().mask == Mask.MaskType.Sad) {
+                GameManager.manager.haveSadMask = true;
+                collision.gameObject.SetActive(false);
+                abilityCurGauge = abilityMaxGauge;
+            }
+        }
+        if(collision.gameObject.tag == "Warp" && collision.GetComponent<Warp_CircleEffect>()) {
+            StartCoroutine(collision.GetComponent<Warp_CircleEffect>().Warp());
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Object") {
+            Object obj = collision.gameObject.GetComponent<Object>();
+            if (obj.Name == Object.objectName.Wind) {
+                windBlowing = false;
+                return;
+            }
         }
     }
     public void Testtest() {
@@ -488,7 +528,8 @@ public class PlayerRenewal : MonoBehaviour {
             }
         }
     }
-    IEnumerator Die() {
+    public IEnumerator Die() {
+        animator.SetTrigger("dieTrigger");
         coroutineRun = true;
         dontInput = true;
         yield return new WaitForSeconds(2f);

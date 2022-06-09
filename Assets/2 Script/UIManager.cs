@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
     [SerializeField]
@@ -13,6 +14,16 @@ public class UIManager : MonoBehaviour {
     private GameObject stageNum;
     [SerializeField]
     private StageManager sm;
+    [SerializeField]
+    PlayerRenewal player;
+    [SerializeField]
+    private RectTransform abilityGaugeBar;
+    [SerializeField]
+    Image[] abilityBoxes;
+    [SerializeField]
+    Sprite playerAbilityBox;
+    [SerializeField]
+    Sprite fairyAbilityBox;
 
     void Start() {
 
@@ -22,7 +33,31 @@ public class UIManager : MonoBehaviour {
     void Update() {
         EscOption();
     }
+    void LateUpdate() {
+        AbilityGaugeBarUpdate();
+        AbilityBoxesUpdate();
+    }
 
+    private void AbilityGaugeBarUpdate() {
+        if (abilityGaugeBar != null)
+            abilityGaugeBar.localScale = new Vector3((player.abilityCurGauge / 5) * 0.5f, 0.5f, 1);
+    }
+    private void AbilityBoxesUpdate() {
+        if (abilityBoxes.Length == 0)
+            return;
+        if (GameManager.manager.playerAbilityOn && abilityBoxes[abilityBoxes.Length-1].sprite == fairyAbilityBox) {
+            //플레이어 어빌리티가 켜진 상태이고, && ui스프라이트가 요정박스 스프라이트일때 실행
+            foreach(Image abilityBox in abilityBoxes) {
+                abilityBox.sprite = playerAbilityBox;
+            }
+        }
+        else if(!GameManager.manager.playerAbilityOn && abilityBoxes[abilityBoxes.Length - 1].sprite == playerAbilityBox) {
+            //요정 어빌리티가 켜진 상태이고, && ui스프라이트가 플레이어박스 스프라이트일때 실행
+            foreach (Image abilityBox in abilityBoxes) {
+                abilityBox.sprite = fairyAbilityBox;
+            }
+        }
+    }
     public void StartBtnClick() {
         // 프롤로그 시작 코드
         SceneManager.LoadScene(1);

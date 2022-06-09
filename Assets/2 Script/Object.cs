@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Object : MonoBehaviour {
-    enum objectName { TreeGrow, Branch3, Branch1_8, HotStone, Ceramic, Mushroom, CloudX, CloudY, SadPail, SadHotStoneSadEnd }
+    public enum objectName { TreeGrow, Branch3, Branch1_8, HotStone, Ceramic, Mushroom, CloudX, CloudY, Wind, SadPail, SadHotStoneSadEnd }
     [SerializeField]
     bool isPassObject;
     [SerializeField]
@@ -34,16 +35,15 @@ public class Object : MonoBehaviour {
 
     bool isPowerOn;
     bool puzzleReady;
+    bool windBlowing;
 
-    //public objectName Name {
-    //    get { return WhatIsObjectName; }
-    //}
-
+    public objectName Name {
+        get { return WhatIsObjectName; }
+    }
 
 
     void Update() {
         PassObjectUpdate();
-        FreezeVelocity();
     }
     void PassObjectUpdate() {
         if (!isPassObject)
@@ -68,8 +68,6 @@ public class Object : MonoBehaviour {
             transform.GetChild(0).gameObject.layer = 10;
         }
     }
-    void FreezeVelocity() {
-    }
     public void Skill() {
         if (isPowerOn)
             return;
@@ -82,16 +80,19 @@ public class Object : MonoBehaviour {
             case objectName.Branch3:
                 anim.SetTrigger("skill 3");
                 isPowerOn = true;
+                PlayerAbilityGaugeUp();
                 StartCoroutine(AnimationReturn(5f));
                 break;
             case objectName.Branch1_8:
                 anim.SetTrigger("skill 1.8");
                 isPowerOn = true;
+                PlayerAbilityGaugeUp();
                 StartCoroutine(AnimationReturn(5f));
                 break;
             case objectName.HotStone:
                 setActiveObject.SetActive(true);
                 isPowerOn = true;
+                PlayerAbilityGaugeUp();
                 break;
             case objectName.Ceramic:
                 StartCoroutine(DownObjects());
@@ -128,6 +129,9 @@ public class Object : MonoBehaviour {
                     return;
                 StartCoroutine(CloudMove("Y"));
                 break;
+            case objectName.Wind:
+
+                break;
         }
     }
     IEnumerator AnimationReturn(float delayTime) {
@@ -161,6 +165,8 @@ public class Object : MonoBehaviour {
         boxCollider.offset = new Vector2(boxCollider.offset.x, 3.28f);
         if (playerUp)
             player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 1.95f);
+        if (playerUp)
+            PlayerAbilityGaugeUp();
 
         //나무가 작아진다.
         yield return new WaitForSeconds(3f);
@@ -365,13 +371,29 @@ public class Object : MonoBehaviour {
         Camera.main.gameObject.GetComponent<CameraMove>().AnimationProgress = false;
         player.dontInput = false;
     }
+    void PlayerAbilityGaugeUp() {
+        //슬픔챕터이고, 게이지가 맥스만큼 안차있다면 실행
+        if (SceneManager.GetActiveScene().buildIndex == 2) {
+            if (player.abilityMaxGauge > player.abilityCurGauge) {
+                player.abilityCurGauge += 1;
+            }
+        }
+    }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "ThrowObject") {
-            Debug.Log("TTTEst");
             if (gameObject.tag == "Skill") {
                 Skill();
             }
             ObjectManager.Instance.ReturnObject(collision.gameObject, "waterBall");
+        }
+
+        if(WhatIsObjectName == objectName.Wind && collision.gameObject.tag == "Player") {
+            windBlowing = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D collision) {
+        if (WhatIsObjectName == objectName.Wind && collision.gameObject.tag == "Player") {
+            windBlowing = false;
         }
     }
 }

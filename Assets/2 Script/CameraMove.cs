@@ -53,7 +53,7 @@ public class CameraMove : MonoBehaviour
         transform.position = cameraPos;
     }
     void highMapMove() {
-        if (!GameManager.thisHighMap)
+        if (!GameManager.manager.thisHighMap)
             return;
         if(player.transform.position.y > startHighMove) {
             if (cameraYMax >= transform.position.y && cameraYMin <= transform.position.y) {

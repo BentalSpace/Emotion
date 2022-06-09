@@ -1052,6 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 1437387778}
+  doFade: 1
 --- !u!114 &201600022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,6 +1123,11 @@ MonoBehaviour:
   stageSelect: {fileID: 0}
   stageNum: {fileID: 0}
   sm: {fileID: 0}
+  player: {fileID: 0}
+  abilityGaugeBar: {fileID: 0}
+  abilityBoxes: []
+  playerAbilityBox: {fileID: 0}
+  fairyAbilityBox: {fileID: 0}
 --- !u!114 &225133002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3190,6 +3196,11 @@ MonoBehaviour:
   stageSelect: {fileID: 0}
   stageNum: {fileID: 0}
   sm: {fileID: 0}
+  player: {fileID: 0}
+  abilityGaugeBar: {fileID: 0}
+  abilityBoxes: []
+  playerAbilityBox: {fileID: 0}
+  fairyAbilityBox: {fileID: 0}
 --- !u!4 &1064056259
 Transform:
   m_ObjectHideFlags: 0
@@ -3639,6 +3650,11 @@ MonoBehaviour:
   stageSelect: {fileID: 0}
   stageNum: {fileID: 0}
   sm: {fileID: 0}
+  player: {fileID: 0}
+  abilityGaugeBar: {fileID: 0}
+  abilityBoxes: []
+  playerAbilityBox: {fileID: 0}
+  fairyAbilityBox: {fileID: 0}
 --- !u!114 &1260178725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4325,6 +4341,11 @@ MonoBehaviour:
   stageSelect: {fileID: 0}
   stageNum: {fileID: 0}
   sm: {fileID: 0}
+  player: {fileID: 0}
+  abilityGaugeBar: {fileID: 0}
+  abilityBoxes: []
+  playerAbilityBox: {fileID: 0}
+  fairyAbilityBox: {fileID: 0}
 --- !u!114 &1427558467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6293,6 +6314,8 @@ MonoBehaviour:
     m_Bits: 128
   footStep: {fileID: 8300000, guid: 0c55531a423784b68ade54e8048e187f, type: 3}
   chapterStageNum: 0-1
+  abilityCurGauge: 0
+  abilityMaxGauge: 0
   dontInput: 0
   isSuperJump: 0
   animator: {fileID: 0}
