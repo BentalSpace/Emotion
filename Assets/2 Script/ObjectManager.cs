@@ -21,6 +21,8 @@ public class ObjectManager : MonoBehaviour
     GameObject cloud2Prefab;
     [SerializeField]
     GameObject cloud3Prefab;
+    [SerializeField]
+    GameObject batPoopPrefab;
 
     Queue<GameObject> arrow;
     Queue<GameObject> waterBall;
@@ -28,16 +30,26 @@ public class ObjectManager : MonoBehaviour
     Queue<GameObject> cloud1;
     Queue<GameObject> cloud2;
     Queue<GameObject> cloud3;
+
+    Queue<GameObject> batPoop;
     void Awake() {
         instance = this;
 
         QueueReset();
 
-        Initialize(arrow, 1, "arrow");
-        Initialize(waterBall, 10, "waterBall");
-        Initialize(cloud1, 30, "cloud1");
-        Initialize(cloud2, 30, "cloud2");
-        Initialize(cloud3, 30, "cloud3");
+        if (arrowPrefab != null)
+            Initialize(arrow, 1, "arrow");
+        if (waterBallPrefab != null)
+            Initialize(waterBall, 10, "waterBall");
+        if (cloud1Prefab != null)
+            Initialize(cloud1, 30, "cloud1");
+        if (cloud2Prefab != null)
+            Initialize(cloud2, 30, "cloud2");
+        if (cloud3Prefab != null)
+            Initialize(cloud3, 30, "cloud3");
+        if (batPoopPrefab) {
+            Initialize(batPoop, 50, "batPoop");
+        }
     }
     private void QueueReset() {
         arrow = new Queue<GameObject>();
@@ -46,6 +58,8 @@ public class ObjectManager : MonoBehaviour
         cloud1 = new Queue<GameObject>();
         cloud2 = new Queue<GameObject>();
         cloud3 = new Queue<GameObject>();
+
+        batPoop = new Queue<GameObject>();
     }
 
     void Initialize(Queue<GameObject> obj, int cnt, string name) {
@@ -83,6 +97,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "cloud3":
                 targetPool = cloud3;
+                break;
+            case "batPoop":
+                targetPool = batPoop;
                 break;
             default:
                 Debug.Log("GetObject not find name Error");
@@ -133,6 +150,9 @@ public class ObjectManager : MonoBehaviour
             case "cloud3":
                 returnObj = cloud3Prefab;
                 break;
+            case "batPoop":
+                returnObj = batPoopPrefab;
+                break;
             default:
                 Debug.Log("SearchPrefab not find name Error");
                 break;
@@ -156,6 +176,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "cloud3":
                 returnQueue = cloud3;
+                break;
+            case "batPoop":
+                returnQueue = batPoop;
                 break;
             default:
                 Debug.Log("SearchQueue not find name Error");

@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
-public class TimelineControl : FadeScript
+public class TimelineControl : MonoBehaviour
 {
-    public PlayableDirector playableDirector;
+    [SerializeField]
+    private string sceneName;
 
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            playableDirector.Pause();
-            Fade();
-        }    
+        StartCoroutine(LoadScene());
     }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(5.5f);
+        MySceneManager.Instance.ChangeScene(sceneName);
+        Destroy(this);
+    }   
 }

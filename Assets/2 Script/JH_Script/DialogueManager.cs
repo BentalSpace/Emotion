@@ -42,13 +42,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private GameObject[] activeGameObjects;
 
-    [SerializeField]
-    private GameObject dialogue;
-
     public bool talking = false;
     private bool keyActivated = false;
 
     PlayerRenewal playerRenewal;
+    CameraToObject cameraToObject;
 
     // Start is called before the first frame update
     void Start()
@@ -101,8 +99,11 @@ public class DialogueManager : MonoBehaviour
         {
             if (activeGameObjects[i] == null)
                 return;
+
             else
+            {
                 activeGameObjects[i].SetActive(true);
+            }
         }
     }
 
@@ -173,7 +174,9 @@ public class DialogueManager : MonoBehaviour
                 {
                     StopAllCoroutines();
                     ExitDialogue();
+                    ActiveObject();
                 }
+
                 else
                 {
                     StopAllCoroutines();

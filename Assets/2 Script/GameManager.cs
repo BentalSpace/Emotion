@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
         Swap();
     }
     void Swap() {
+        if (fairyAbility == null)
+            return;
         if (fairyAbility.Sading)
             return;
         if (Input.GetButtonDown("Swap"))

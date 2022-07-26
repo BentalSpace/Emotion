@@ -122,8 +122,12 @@ public class WildBoar : MonoBehaviour
             Rigidbody2D playerRigid = collision.gameObject.GetComponent<Rigidbody2D>();
 
             player.Rigid.AddForce(new Vector2(randDis * 10, 10), ForceMode2D.Impulse);
+            Invoke("StartPositionWarp", 2.0f);
         }
 
+    }
+    void StartPositionWarp() {
+        gameObject.transform.position = new Vector2(800, -5.8f);
     }
     void HitNextReady(float delayTime) {
         isHit = true;

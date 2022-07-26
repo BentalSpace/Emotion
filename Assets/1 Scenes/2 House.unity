@@ -2101,7 +2101,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4db3215050464da4ca1899932b85ffbf, type: 3}
+    m_Font: {fileID: 12800000, guid: 3c2b59ec238e41847a2beb916e559378, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -3442,7 +3442,6 @@ MonoBehaviour:
   activeGameObjects:
   - {fileID: 2824330168657234624}
   - {fileID: 689066236}
-  dialogue: {fileID: 0}
   talking: 0
 --- !u!1 &8957066937167948001
 GameObject:
@@ -3566,7 +3565,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 4db3215050464da4ca1899932b85ffbf, type: 3}
+    m_Font: {fileID: 12800000, guid: 3c2b59ec238e41847a2beb916e559378, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0

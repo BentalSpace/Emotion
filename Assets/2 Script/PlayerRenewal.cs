@@ -65,6 +65,8 @@ public class PlayerRenewal : MonoBehaviour {
 
     private bool sadD;
     private bool sading;
+    private bool horrorD;
+    private bool horroring;
     public bool isSuperJump;
     private bool test;
     private bool windBlowing;
@@ -80,7 +82,6 @@ public class PlayerRenewal : MonoBehaviour {
     private GameObject stageNumObject;
 
     IEnumerator idleDelay;
-    IEnumerator dieCoroutine;
 
     //component
     Rigidbody2D rigid;
@@ -110,8 +111,8 @@ public class PlayerRenewal : MonoBehaviour {
 
         if (SceneManager.GetActiveScene().buildIndex == 1) {
 
-            youCanJump = true;
-            youCanCrawl = true;
+            youCanJump = false;
+            youCanCrawl = false;
         }
         else {
             youCanJump = true;
@@ -119,14 +120,12 @@ public class PlayerRenewal : MonoBehaviour {
         }
         jumpEnd = true;
 
-        dieCoroutine = Die();
         applySpeed = walkSpeed;
         abilityMaxGauge = 5;
     }
     void Start() {
         //씬 변경 후 스테이지 정보 가져오기 / 스테이지 정보는 "(chapter)-(stage)" 형식
         stageNumObject = GameObject.Find("StageNum");
-        //Debug.Log(stageNumObject.name);
         if (stageNumObject == null) {
             Debug.Log("chapter stage number not find");
         }
@@ -136,6 +135,7 @@ public class PlayerRenewal : MonoBehaviour {
 
             //스테이지에 맞는 포지션에 플레이어 스폰
             GameObject pos = GameObject.Find(chapterStageNum);
+            Debug.Log(pos.transform.position);
             rigid.position = pos.transform.position;
 
             chapter = int.Parse(chapterStageNum.Split('-')[0]);
@@ -152,7 +152,7 @@ public class PlayerRenewal : MonoBehaviour {
                 youCanCrawl = true;
             }
         }
-        Destroy(stageNumObject);
+        //Destroy(stageNumObject);
     }
     void Update() {
         if (Input.GetButton("Jump")) {
@@ -162,9 +162,6 @@ public class PlayerRenewal : MonoBehaviour {
             animator.SetBool("isJumpPress", false);
         }
 
-        if ((Input.GetButtonUp("Sit") || !Input.GetButton("Sit")) && !dontInput) {
-            animator.SetTrigger("sitTrigger");
-        }
         Sit();
         SkillDownCheck();
 
@@ -173,6 +170,7 @@ public class PlayerRenewal : MonoBehaviour {
 
     }
     void FixedUpdate() {
+        Debug.DrawRay(transform.position + Vector3.up * 1.5f + Vector3.right * 0.2f, Vector3.up * 1.4f, Color.red);
         setHorizontal();
         EtcMove();
         PlusVelocity();
@@ -198,12 +196,18 @@ public class PlayerRenewal : MonoBehaviour {
         if (dontInput) {
             sadD = false;
         }
+        // 플레이어능력이 켜져있나? ( 아니면 요정능력이 켜져있는 상태 )
         if (GameManager.manager.playerAbilityOn) {
-            sadD = Input.GetButton("Sad");
+            if (!sading) {
+                sadD = Input.GetButton("Sad");
+                horrorD = Input.GetButton("Horror");
+            }
         }
         else {
             sadD = false;
             sading = false;
+            horrorD = false;
+            horroring = false;
         }
     }
     void SkillAnimation() {
@@ -219,6 +223,7 @@ public class PlayerRenewal : MonoBehaviour {
     void sadOut() {
         sading = false;
     }
+    // 기본적인 이동 이외의 다른 요소로 인한 속도 변화 확인
     void PlusVelocity() {
         // 플레이어의 바닥이 움직이는 바닥일때
         plusVelocity = Vector2.zero;
@@ -240,6 +245,7 @@ public class PlayerRenewal : MonoBehaviour {
             plusVelocity += new Vector2(-2.8f, 0);
         }
     }
+    // 플레이어 이동관련
     void Move() {
         //Move
         if (dontInput || isSitUp || isSuperJump)
@@ -256,6 +262,7 @@ public class PlayerRenewal : MonoBehaviour {
         //if(animator.GetBool("isSit") && animator.GetBool("isWalk"))
         //    rigid.velocity = new Vector2(crawlSpeed * h, 0);
     }
+    // 플레이어 점프
     void Jump() {
         if (!youCanJump)
             return;
@@ -271,6 +278,7 @@ public class PlayerRenewal : MonoBehaviour {
         rigid.velocity = plusVelocity + new Vector2(applySpeed * h, jumpPower);
         animator.SetBool("isJumpPress", true);
     }
+    // 플레이어 바닥이 땅인지 확인
     void GroundCheck() {
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround | LayerMask.GetMask("Object"));
 
@@ -297,6 +305,7 @@ public class PlayerRenewal : MonoBehaviour {
             isSuperJump = false;
         }
     }
+    // 플레이어 앉기
     void Sit() {
         if (!youCanCrawl)
             return;
@@ -308,8 +317,17 @@ public class PlayerRenewal : MonoBehaviour {
             animator.SetBool("isSit", true);
             applySpeed = crawlSpeed;
         }
-        else if (Input.GetButtonUp("Sit")) {
-            applySpeed = walkSpeed;
+        //else if (Input.GetButtonUp("Sit")) {
+        //    if (!Physics2D.Raycast(transform.position + Vector3.up * 1.5f + Vector3.right * 0.2f, Vector3.up, 1.4f){
+        //        applySpeed = walkSpeed;
+        //    }
+        //}
+        // 앉아있는 플레이어 일어나기.
+        if ((Input.GetButtonUp("Sit") || !Input.GetButton("Sit")) && !dontInput) {
+            if (!Physics2D.Raycast(transform.position + Vector3.up * 1.5f + Vector3.right * 0.2f, Vector3.up, 1.4f)){
+                applySpeed = walkSpeed;
+                animator.SetTrigger("sitTrigger");
+            }
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("SitUp")
           && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f) {
@@ -324,6 +342,7 @@ public class PlayerRenewal : MonoBehaviour {
            && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
             animator.SetTrigger("sitTrigger");
     }
+    // 움직이지 않고, 가만히 있는경우
     void Idle() {
         //idle 빌드업
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("stand") && !idleCoroutinePlay) {
@@ -459,29 +478,29 @@ public class PlayerRenewal : MonoBehaviour {
         }
     }
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "CanJump") {
+        if (collision.CompareTag("CanJump")) {
             youCanJump = true;
         }
-        if (collision.gameObject.tag == "CanCrawl") {
+        if (collision.CompareTag("CanCrawl")) {
             youCanCrawl = true;
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !coroutineRun) {
             //장애물과 부딪혔을때
-            StartCoroutine(dieCoroutine);
+            StartCoroutine(Die());
         }
-        if (collision.gameObject.tag == "stageSave") {
+        if (collision.CompareTag("stageSave")) {
             //구간 저장
             sm.ChapterStageNum = collision.gameObject.name;
         }
-        if (collision.gameObject.tag == "nextChapter")
-        {
-            // 다음 챕터로 이동
-            GameObject chapterStage = GameObject.Find("StageManager");
-            chapterStage.name = "StageNum";
-            SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 2);
-            DontDestroyOnLoad(chapterStage);
-        }
-        if (collision.gameObject.tag == "Object") {
+        //if (collision.gameObject.tag == "nextChapter")
+        //{
+        //    // 다음 챕터로 이동
+        //    GameObject chapterStage = GameObject.Find("StageManager");
+        //    chapterStage.name = "StageNum";
+        //    SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 2);
+        //    DontDestroyOnLoad(chapterStage);
+        //}
+        if (collision.CompareTag("Object")) {
             test = true;
             Object obj = collision.gameObject.GetComponent<Object>();
             if (obj.Name == Object.objectName.Wind) {
@@ -490,21 +509,21 @@ public class PlayerRenewal : MonoBehaviour {
             }
             obj.ObjectAbility(transform, this);
         }
-        if(collision.gameObject.tag == "Mask") {
+        if(collision.CompareTag("Mask")) {
             //마스크 획득
             if(collision.gameObject.GetComponent<Mask>().mask == Mask.MaskType.Sad) {
-                GameManager.manager.haveSadMask = true;
-                collision.gameObject.SetActive(false);
+                collision.gameObject.GetComponent<Mask>().MaskEvent(this);
                 abilityCurGauge = abilityMaxGauge;
             }
         }
-        if(collision.gameObject.tag == "Warp" && collision.GetComponent<Warp_CircleEffect>()) {
+        if(collision.CompareTag("Warp") && collision.GetComponent<Warp_CircleEffect>()) {
             StartCoroutine(collision.GetComponent<Warp_CircleEffect>().Warp());
         }
     }
     void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Object") {
+        if (collision.CompareTag("Object")) {
             Object obj = collision.gameObject.GetComponent<Object>();
+            // 바람에서 벗어날 때, 이동속도는 다시 정상으로
             if (obj.Name == Object.objectName.Wind) {
                 windBlowing = false;
                 return;
@@ -518,19 +537,21 @@ public class PlayerRenewal : MonoBehaviour {
         test = false;
     }
     void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Skill") {
+        if (collision.CompareTag("Skill")) {
             if (sadD) {
-                if (collision.gameObject.GetComponent<Object>() != null)
+                if (collision.gameObject.GetComponent<Object>() != null) {
                     collision.gameObject.GetComponent<Object>().Skill();
-                else if(collision.gameObject.GetComponent<Chipmunk>() != null) {
+                    sadD = false;
+                }
+                else if (collision.gameObject.GetComponent<Chipmunk>() != null) {
                     collision.gameObject.GetComponent<Chipmunk>().CutScene(this);
                 }
             }
         }
     }
     public IEnumerator Die() {
-        animator.SetTrigger("dieTrigger");
         coroutineRun = true;
+        animator.SetTrigger("dieTrigger");
         dontInput = true;
         yield return new WaitForSeconds(2f);
 
@@ -541,9 +562,10 @@ public class PlayerRenewal : MonoBehaviour {
         //SceneManager.LoadScene(int.Parse(sm.ChapterStageNum.Split('-')[0]) + 1);
         //DontDestroyOnLoad(chapterStage);
         Anim.SetTrigger("resTrigger");
+        coroutineRun = false;
+        jumpEnd = true;
         dontInput = false;
 
-        coroutineRun = false;
     }
 
     private void OnDrawGizmos() {

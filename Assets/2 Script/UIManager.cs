@@ -60,8 +60,8 @@ public class UIManager : MonoBehaviour {
     }
     public void StartBtnClick() {
         // 프롤로그 시작 코드
-        SceneManager.LoadScene(1);
-
+        // SceneManager.LoadScene(1);
+        MySceneManager.Instance.ChangeScene("CutScene");
     }
     public void ContinueBtnClick() {
         onOffUI.SetActive(true);

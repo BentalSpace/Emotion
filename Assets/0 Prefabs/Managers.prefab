@@ -83,6 +83,7 @@ MonoBehaviour:
   cloud1Prefab: {fileID: 1160399672679965639, guid: 2baf103353b1d3b4596c76f18ec152a2, type: 3}
   cloud2Prefab: {fileID: 6061586862913813922, guid: c8dbdec874be78647867248e196d140e, type: 3}
   cloud3Prefab: {fileID: 8755882823189332338, guid: 9e8850f46a9ed91418d165a9136356fa, type: 3}
+  batPoopPrefab: {fileID: 6013260062087294193, guid: 5310bc75917106f4bbc2ffc6a197dacc, type: 3}
 --- !u!1 &5738272639430275673
 GameObject:
   m_ObjectHideFlags: 0

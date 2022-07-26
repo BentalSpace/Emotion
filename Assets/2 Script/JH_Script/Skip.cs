@@ -13,6 +13,7 @@ public class Skip : MonoBehaviour
 
     public void ButtonClick()
     {
+        Debug.Log("½ºÅµ");
         theDM.ExitDialogue();
     }
 }

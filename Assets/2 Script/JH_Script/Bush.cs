@@ -20,6 +20,9 @@ public class Bush : MonoBehaviour
         {
             for (int i = 0; i < gameObjects.Length; i++)
             {
+                if (gameObjects[i] == null)
+                    return;
+
                 gameObjects[i].SetActive(true);
             }
         }

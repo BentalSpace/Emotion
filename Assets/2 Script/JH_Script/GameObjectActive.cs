@@ -44,7 +44,10 @@ public class GameObjectActive : MonoBehaviour
     {
         for (int i = 0; i < objs.Length; i++)
         {
+            if (objs[i] == null) 
+                return;
+                
             objs[i].SetActive(true);
-        }   
+        }
     }
 }

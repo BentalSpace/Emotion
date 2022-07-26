@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Warp_CircleEffect : MonoBehaviour
 {
@@ -12,15 +13,16 @@ public class Warp_CircleEffect : MonoBehaviour
     Animator circleEffect;
 
     public IEnumerator Warp() {
+        circleEffect.gameObject.SetActive(true);
         circleEffect.gameObject.transform.position = player.transform.position;
         circleEffect.SetTrigger("big");
-        player.gameObject.GetComponent<PlayerRenewal>().dontInput = true;
-        yield return new WaitForSeconds(0.6f);
-        player.position = targetWarp.position;
-        circleEffect.gameObject.transform.position = player.transform.position;
-        circleEffect.SetTrigger("small");
-        
-        player.gameObject.GetComponent<PlayerRenewal>().dontInput = false;
+
+        yield return new WaitForSeconds(1.1f);
+        GameObject chapterStage = GameObject.Find("StageManager");
+        chapterStage.name = "StageNum";
+        chapterStage.transform.parent = default;
+        SceneManager.LoadScene("HorrorUnderGround");
+        DontDestroyOnLoad(chapterStage);
     }
     private void Update() {
     }

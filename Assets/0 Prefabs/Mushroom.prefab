@@ -97,7 +97,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017310143, y: -0.20338714}
+  m_Offset: {x: -0.02, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0825939, y: 1.0047014}
+  m_Size: {x: 1.08, y: 1}
   m_EdgeRadius: 0
 --- !u!95 &7804521034806018048
 Animator:
@@ -175,7 +175,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029281616, y: 0.05270362}
+  m_Offset: {x: -0.02, y: 0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -186,7 +186,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1594849, y: 1.2054071}
+  m_Size: {x: 2.15, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &7804521034894225273
 MonoBehaviour:
@@ -211,4 +211,5 @@ MonoBehaviour:
   cloudMoveEndPos: 0
   setActiveObject: {fileID: 0}
   boxCollider: {fileID: 0}
+  changeImage: {fileID: 0}
   needGameObject: []

@@ -4,43 +4,34 @@ using UnityEngine;
 
 public class CameraToObject : MonoBehaviour
 {
-    CameraMove cameraMove;
-    new Camera camera;
+    Animator cameraAnim;
 
-    DialogueManager theDM;
     PlayerRenewal playerRenewal;
+    DialogueManager dialogueManager;
 
-    [SerializeField]
-    Transform targetObject;
-    //GameObject target;
-
-    Vector3 targetPosition;
-    Vector3 velocity = Vector3.zero;
-
-    public float smoothTime = 0.3f;
-    // public float invokeTime;
+    public bool start;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraMove = GameObject.Find("Main Camera").GetComponent<CameraMove>();
+        cameraAnim = GameObject.Find("Main Camera").GetComponent<Animator>();
         playerRenewal = GameObject.Find("player").GetComponent<PlayerRenewal>();
-        camera = Camera.main;
-        theDM = FindObjectOfType<DialogueManager>();
+        dialogueManager = GameObject.Find("DialogueManager").GetComponent<DialogueManager>();
+
+        start = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        transform.position = new Vector3(167.71f, 2.25f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            playerRenewal.dontInput = true;
-            MoveToCamera();
+            dialogueManager.ExitDialogue();
+            StartCoroutine(CameraAnimMove());
         }
     }
 
@@ -48,26 +39,23 @@ public class CameraToObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            gameObject.SetActive(false);
+            StopCoroutine(CameraAnimMove());
         }
     }
 
-    public void MoveToCamera()
-    {
-        cameraMove.GetComponent<CameraMove>().enabled = false;
-        StartCoroutine(Move());
-    }
-
-    IEnumerator Move()
-    {
-        playerRenewal.dontInput = false;
+    IEnumerator CameraAnimMove()
+    { 
+        playerRenewal.dontInput = true;
         yield return new WaitForSeconds(1.0f);
-        camera.transform.position = new Vector3(195, 2.5f, -10);
+        cameraAnim.enabled = true;
+        cameraAnim.SetBool("AnimStart", true);
+
+        yield return new WaitForSeconds(5.0f);
+        cameraAnim.SetBool("AnimStart", false);
 
         yield return new WaitForSeconds(3.0f);
-        cameraMove.GetComponent<CameraMove>().enabled = true;
-
-        yield return new WaitForSeconds(0f);
-        theDM.ExitDialogue();
+        cameraAnim.enabled = false;
+        playerRenewal.dontInput = false;
+        gameObject.SetActive(false);
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Stalactite : MonoBehaviour
 {
+    [SerializeField]
+    float spawnDelay;
+    [SerializeField]
+    float shotDelay;
+
     Transform initialTransform;
 
     float curDelay;
-    float shotDelay;
-    float spawnDelay;
 
     bool isSpawn;
     bool spawning;
@@ -18,13 +21,12 @@ public class Stalactite : MonoBehaviour
     SpriteRenderer sprite;
     void Awake() {
         initialTransform = gameObject.transform.parent;
-        spawnDelay = 1.5f;
-        shotDelay = 2.0f;
+        //spawnDelay = 1.5f;
+        //shotDelay = 2.0f;
         isSpawn = true;
 
         rigid = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-        Debug.Log("awake");
     }
     void Update() {
         if (!spawning) // 종유석이 자라는 중이라면 딜레이를 채우지 않는다.
@@ -67,16 +69,24 @@ public class Stalactite : MonoBehaviour
         if (isSpawn) {
             if (curDelay > shotDelay) {
                 //종유석 발사
-                curDelay = 0;
-
-                rigid.bodyType = RigidbodyType2D.Dynamic;
+                StartCoroutine(StalactiteShotAndInit());
             }
         }
     }
+    IEnumerator StalactiteShotAndInit() {
+        curDelay = 0;
+        rigid.bodyType = RigidbodyType2D.Dynamic;
+        yield return new WaitForSeconds(spawnDelay);
+        isSpawn = false;
+        rigid.velocity = Vector2.zero;
+        rigid.bodyType = RigidbodyType2D.Kinematic;
+    }
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Player") {
+            //플레이어에 닿으면
             isSpawn = false;
             StartCoroutine(collision.gameObject.GetComponent<PlayerRenewal>().Die());
+            rigid.bodyType = RigidbodyType2D.Kinematic;
         }
         if(collision.gameObject.layer == 7) {
             //플랫폼에 닿으면
@@ -84,7 +94,6 @@ public class Stalactite : MonoBehaviour
             rigid.bodyType = RigidbodyType2D.Kinematic;
             sprite.enabled = false;
             rigid.velocity = Vector2.zero;
-            gameObject.transform.rotation = Quaternion.identity;
         }
     }
 }
