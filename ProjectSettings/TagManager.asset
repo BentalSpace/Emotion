@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - CanJump
+  - CanCrawl
+  - nextChapter
+  - stageSave
+  - animationStart
+  - Object
+  - Warp
+  - Out
+  - Skill
+  - ThrowObject
+  - Tree
+  - Mask
+  - Debuff
+  - Pillar
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Platform
+  - Obstacle
+  - Object
+  - PassObject
+  - SitPassObject
+  - HorrorPlayer
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2551578065
+    locked: 0
+  - name: Particle
+    uniqueID: 1380286511
+    locked: 0

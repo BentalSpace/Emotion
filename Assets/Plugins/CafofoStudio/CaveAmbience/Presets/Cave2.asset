@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60702322da1861469c33ab969274437, type: 3}
+  m_Name: Cave2
+  m_EditorClassIdentifier: 
+  presetName: Cave 2
+  atmosphere1Intensity: 0.33
+  atmosphere1VolumeMultiplier: 0.21
+  atmosphere2Intensity: 0.97
+  atmosphere2VolumeMultiplier: 0.27
+  atmosphere3Intensity: 0.26
+  atmosphere3VolumeMultiplier: 0.67
+  sedimentIntensity: 0.3
+  sedimentVolumeMultiplier: 0.5
+  waterDropsIntensity: 0.7
+  waterDropsVolumeMultiplier: 0.35
+  waterStreamIntensity: 0.05
+  waterStreamVolumeMultiplier: 0.43
+  sewerIntensity: 0
+  sewerVolumeMultiplier: 1
+  fireIntensity: 0
+  fireVolumeMultiplier: 1
+  crittersIntensity: 0.27
+  crittersVolumeMultiplier: 0.48

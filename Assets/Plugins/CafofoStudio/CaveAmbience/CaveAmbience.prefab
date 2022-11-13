@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494420}
+  - component: {fileID: 11436022}
+  m_Layer: 0
+  m_Name: CaveAmbience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112740}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11436022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7584e15e530028e4ebd6b29b915d9202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 1
+  presets:
+  - {fileID: 11400000, guid: 028096e8729fb8c448e87d8e5a55e275, type: 2}
+  - {fileID: 11400000, guid: 0e707de094e528f4ba66b874fcfadfaf, type: 2}
+  - {fileID: 11400000, guid: 79c9a6062fbf7f74e8936556d98f335d, type: 2}
+  - {fileID: 11400000, guid: 500585231bca6744cbc0dd71488a0cb8, type: 2}
+  - {fileID: 11400000, guid: 7cde9a06eab9e9f4a97aa7917378beff, type: 2}
+  - {fileID: 11400000, guid: 2a06f12f7aa656c46b03b60265fb2bb8, type: 2}
+  - {fileID: 11400000, guid: d6919ee42cc1c8645be023b43670486b, type: 2}
+  _atmosphere1:
+    soundName: Atmosphere 1
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 0
+      audioClips:
+      - {fileID: 8300000, guid: 3dfdf6a0ef5b68d4282aa741b6e62dea, type: 3}
+      - {fileID: 8300000, guid: 5ba6f7fa5870fb24aaa5f9697143f5a1, type: 3}
+      - {fileID: 8300000, guid: deb0aef23e3f2264f8d0997d229430d5, type: 3}
+  _atmosphere2:
+    soundName: Atmosphere 2
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 0
+      audioClips:
+      - {fileID: 8300000, guid: 43c9a05da2d1ec3418bcd2a0ccee5901, type: 3}
+      - {fileID: 8300000, guid: 2537b9016cbea424ebe5f0e958a0009f, type: 3}
+      - {fileID: 8300000, guid: d82830cb5596aba4cb8e1a318c445804, type: 3}
+  _atmosphere3:
+    soundName: Atmosphere 3
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 0
+      audioClips:
+      - {fileID: 8300000, guid: c93daa37b4f97db42a0b5246dc816380, type: 3}
+      - {fileID: 8300000, guid: 53303ca150b770843b1c235426764cbe, type: 3}
+      - {fileID: 8300000, guid: 5e71866a46331404ab781602c1069098, type: 3}
+  _sediment:
+    soundName: Sediment
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 79422330b5cdeba43b1ad687d4a9d92c, type: 3}
+      - {fileID: 8300000, guid: 57faebf3dca84ed458fe776b995e0074, type: 3}
+      - {fileID: 8300000, guid: b92b2f34f5c387140beaa663485305a9, type: 3}
+      - {fileID: 8300000, guid: 300d7c85de10e3f45aa5b32c558b4ba6, type: 3}
+      - {fileID: 8300000, guid: 2cee611804cdbf04b868ff7582ba7a37, type: 3}
+      - {fileID: 8300000, guid: d0f2ea380375ff9489567cfb3b80d787, type: 3}
+      - {fileID: 8300000, guid: 47d9b658f544ad94586d87df926efc57, type: 3}
+      - {fileID: 8300000, guid: 347ab0a97c0c65949a4bbddb6b6c39ea, type: 3}
+      - {fileID: 8300000, guid: 135e30baa2ee2a7468068a4951a1edaa, type: 3}
+      - {fileID: 8300000, guid: 809a68db36e4cfe4c9341a6460a9e040, type: 3}
+      - {fileID: 8300000, guid: a1560dac3d67e0a4982078b5e3e47406, type: 3}
+      - {fileID: 8300000, guid: 3205e12d242e96d478a8d77e4e05b021, type: 3}
+      - {fileID: 8300000, guid: c60298bd2d8a170489c96b52ffa76c74, type: 3}
+      - {fileID: 8300000, guid: de89d54e83fc25543843a421f461a480, type: 3}
+      - {fileID: 8300000, guid: eb7b04bfd02a9d7478a47882691ca039, type: 3}
+      lowIntensityMinSeconds: 10
+      lowIntensityMaxSeconds: 60
+      highIntensityMinSeconds: 3
+      highIntensityMaxSeconds: 5
+    loopSubElements: []
+  _waterDrops:
+    soundName: Water Drops
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 62a81120067025d408ac02d4adb63988, type: 3}
+      - {fileID: 8300000, guid: 1b1c9d01d5cedf145b3135cd4e6178dc, type: 3}
+      - {fileID: 8300000, guid: 96c6ac12621d32e4f8d8ba0c6362c53a, type: 3}
+      - {fileID: 8300000, guid: 8bb78172af00ec54490b7ff0acabb0e5, type: 3}
+      - {fileID: 8300000, guid: c73b8c932b4049b4f918c1f14ab73beb, type: 3}
+      - {fileID: 8300000, guid: 233f3d85690779849bff3c13479bb25f, type: 3}
+      - {fileID: 8300000, guid: 601eb6186de6a2743ae37c167509ed57, type: 3}
+      - {fileID: 8300000, guid: 740d8828d29e5994bb2abf3af4d4034e, type: 3}
+      - {fileID: 8300000, guid: 37fdda5835216af43a677f19c63396ba, type: 3}
+      - {fileID: 8300000, guid: 35d801b862359c2409cab50541e22059, type: 3}
+      - {fileID: 8300000, guid: 5208a8d8c896dd94a97af60996d99d63, type: 3}
+      - {fileID: 8300000, guid: 268ac619be51572468a50313a6de1c67, type: 3}
+      - {fileID: 8300000, guid: 618309a9504bf1840b3ca7ee09d356a5, type: 3}
+      - {fileID: 8300000, guid: 6945abf9b4ad4614e8cf2c9b647c9331, type: 3}
+      - {fileID: 8300000, guid: 82a7e2da5ac60314d825f9d73b75e323, type: 3}
+      - {fileID: 8300000, guid: 164aaeea0e7364940ae69203e8a66183, type: 3}
+      - {fileID: 8300000, guid: 1f214a5b21bb0ab44bbc7c0b08ae9e27, type: 3}
+      - {fileID: 8300000, guid: 1d5a3c5bdae70c345ac867365d04b16f, type: 3}
+      - {fileID: 8300000, guid: 648aae7bbb16bca499fd108f307c551a, type: 3}
+      - {fileID: 8300000, guid: 977dda0c59c109647a8aaec0f7621e5f, type: 3}
+      - {fileID: 8300000, guid: a53d5d6c19114514ca90aff862814aff, type: 3}
+      - {fileID: 8300000, guid: bd195b1f62ad0c8458b158453a7898aa, type: 3}
+      - {fileID: 8300000, guid: acd7f13f543fd9643ae12071c5def178, type: 3}
+      - {fileID: 8300000, guid: d4c3496034bd4b848bda8fa2dccb913f, type: 3}
+      - {fileID: 8300000, guid: fbec31c02e7d7bb4db1eb956e0605444, type: 3}
+      - {fileID: 8300000, guid: f8af0931f5b64294bbc9c84fec743edc, type: 3}
+      - {fileID: 8300000, guid: dbb8fda267e0407438fcb9faa414c618, type: 3}
+      - {fileID: 8300000, guid: da137ee30c9fa2842a4c02e216c6eaf5, type: 3}
+      - {fileID: 8300000, guid: dfa6a20945585b6448dd47cf8dc754a4, type: 3}
+      - {fileID: 8300000, guid: faa7b47f1f6a15b49848c60ff2ac2336, type: 3}
+      lowIntensityMinSeconds: 19
+      lowIntensityMaxSeconds: 29
+      highIntensityMinSeconds: 0.3
+      highIntensityMaxSeconds: 0.6
+    loopSubElements: []
+  _waterStream:
+    soundName: Water Stream
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 0
+      audioClips:
+      - {fileID: 8300000, guid: 63fc0e0049261d84cbd7cb079b8359b5, type: 3}
+      - {fileID: 8300000, guid: 021ca9358388fae4eb6ef41acfbfa4b8, type: 3}
+      - {fileID: 8300000, guid: b101f3b51123a8b46a4cc1d2bfd219b0, type: 3}
+  _sewer:
+    soundName: Sewer
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 1
+      audioClips:
+      - {fileID: 8300000, guid: ebb3c42760c72294db952dc320c6e6a8, type: 3}
+      - {fileID: 8300000, guid: 82b88fdb96bca4b4eafb13e73742987d, type: 3}
+      - {fileID: 8300000, guid: 945243b0a5f12b94780a5482dd34a766, type: 3}
+  _fire:
+    soundName: Fire
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - isAditive: 0
+      audioClips:
+      - {fileID: 8300000, guid: 9a3aa4fafa160d14f9a563cca7e7b517, type: 3}
+      - {fileID: 8300000, guid: 6b86300eabde5f64e897d6251bf27220, type: 3}
+      - {fileID: 8300000, guid: 2ea48713a601ab64f863a571ba61fbad, type: 3}
+      - {fileID: 8300000, guid: e653c277c424de0498c49dcaaf418cd0, type: 3}
+  _critters:
+    soundName: Critters
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: 
+    minIntensityLabel: 
+    volumeMultiplier: 1
+    sampleSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: eb7bff10e898ee4479c9fd614cb13596, type: 3}
+      - {fileID: 8300000, guid: ef7967404fa018b49b85d1c426385ce1, type: 3}
+      - {fileID: 8300000, guid: f9407750554880240959281fd57753c3, type: 3}
+      - {fileID: 8300000, guid: c697953131070e34783e7b757c92e5de, type: 3}
+      - {fileID: 8300000, guid: 04280e12be191be4983db56b448fd445, type: 3}
+      - {fileID: 8300000, guid: 43bff152847aba945adbf6b06fcd1d53, type: 3}
+      - {fileID: 8300000, guid: 77aa4bb2764b43b4d9bdb9f073553fa4, type: 3}
+      - {fileID: 8300000, guid: 29dedf4339a47f448a9e3963aeb9db94, type: 3}
+      - {fileID: 8300000, guid: 998ce9f3fd0848e4ab4323bd37eb7fa8, type: 3}
+      - {fileID: 8300000, guid: 80b8ee245ba5b9f4c83df3b1fa6a1f5a, type: 3}
+      - {fileID: 8300000, guid: 2961b09525295274791436179b1b54f7, type: 3}
+      - {fileID: 8300000, guid: d212d53666e058742aacf4c93a6818ea, type: 3}
+      - {fileID: 8300000, guid: 9846316612560c949a2ff64da81bcdea, type: 3}
+      - {fileID: 8300000, guid: e83049d6392ccb64f8c61af16e5be801, type: 3}
+      - {fileID: 8300000, guid: 4dd9ac1991aa7244b96fc1bebb43b74c, type: 3}
+      - {fileID: 8300000, guid: 7169888916de5444a821c7302a72c2bc, type: 3}
+      - {fileID: 8300000, guid: bd14643a7b8e1bb4594b9f2a1bfdc973, type: 3}
+      - {fileID: 8300000, guid: 04c7c28a7f50b4146b35f1f28dfca78a, type: 3}
+      - {fileID: 8300000, guid: 292e9ecb306f6a64d9bba4f4a5788608, type: 3}
+      - {fileID: 8300000, guid: 31508fdcbe4cac741875e291c1c2c077, type: 3}
+      - {fileID: 8300000, guid: 1ddf1a1d2572d39488d61be58cf3a11f, type: 3}
+      - {fileID: 8300000, guid: 457b169de75330c4f80c31628990ffaa, type: 3}
+      lowIntensityMinSeconds: 10
+      lowIntensityMaxSeconds: 30
+      highIntensityMinSeconds: 0.2
+      highIntensityMaxSeconds: 0.8
+    - audioClips:
+      - {fileID: 8300000, guid: 999bfa6238b16664e911508ffe8abaa2, type: 3}
+      - {fileID: 8300000, guid: 6d9c43e79b550b943b251a6e8d9cba99, type: 3}
+      - {fileID: 8300000, guid: 754829d9593b09a4390a89622a639bb2, type: 3}
+      - {fileID: 8300000, guid: 33440efbacd3a0b459413013914c32c6, type: 3}
+      - {fileID: 8300000, guid: 63d0446de54520943a4bf091563fa782, type: 3}
+      - {fileID: 8300000, guid: 83586eeb59533484aa62d80a9ee95c54, type: 3}
+      - {fileID: 8300000, guid: ae829b41fd55a9740afef79514581c57, type: 3}
+      - {fileID: 8300000, guid: 819e9ade4fc4857489852bcf84c8e31f, type: 3}
+      lowIntensityMinSeconds: 30
+      lowIntensityMaxSeconds: 120
+      highIntensityMinSeconds: 10
+      highIntensityMaxSeconds: 30
+    loopSubElements: []

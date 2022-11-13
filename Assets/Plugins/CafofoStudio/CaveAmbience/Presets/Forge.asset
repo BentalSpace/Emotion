@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60702322da1861469c33ab969274437, type: 3}
+  m_Name: Forge
+  m_EditorClassIdentifier: 
+  presetName: Forge
+  atmosphere1Intensity: 0.21
+  atmosphere1VolumeMultiplier: 0.62
+  atmosphere2Intensity: 0.38
+  atmosphere2VolumeMultiplier: 0.75
+  atmosphere3Intensity: 0.19
+  atmosphere3VolumeMultiplier: 0.59
+  sedimentIntensity: 0.74
+  sedimentVolumeMultiplier: 0.2
+  waterDropsIntensity: 0.33
+  waterDropsVolumeMultiplier: 0.29
+  waterStreamIntensity: 0
+  waterStreamVolumeMultiplier: 1
+  sewerIntensity: 0
+  sewerVolumeMultiplier: 1
+  fireIntensity: 0.97
+  fireVolumeMultiplier: 1
+  crittersIntensity: 0.3
+  crittersVolumeMultiplier: 0.25

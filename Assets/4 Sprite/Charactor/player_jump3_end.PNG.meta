@@ -1,0 +1,277 @@
+fileFormatVersion: 2
+guid: f94568a01c26da54495a5556e074f558
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1479521386849408563
+    second: player_jump3_end_0
+  - first:
+      213: 8046271656193605048
+    second: player_jump3_end_1
+  - first:
+      213: -1851763655989749940
+    second: player_jump3_end_2
+  - first:
+      213: -4755013824284721260
+    second: player_jump3_end_3
+  - first:
+      213: -1146382883827072415
+    second: player_jump3_end_4
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: player_jump3_end_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 23
+        width: 139
+        height: 277
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.5, y: 138.5}
+        - {x: -17.5, y: 125.5}
+        - {x: -26.5, y: 115.5}
+        - {x: -69.5, y: -70.5}
+        - {x: -69.5, y: -85.5}
+        - {x: -41.5, y: -138.5}
+        - {x: 47.5, y: -138.5}
+        - {x: 69.5, y: -52.5}
+        - {x: 69.5, y: 132.5}
+        - {x: 57.5, y: 138.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc96f33332fa77be0800000000000000
+      internalID: -1479521386849408563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_jump3_end_1
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 1
+        width: 120
+        height: 284
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 142}
+        - {x: -52, y: 120}
+        - {x: -44, y: 50}
+        - {x: -29, y: 48}
+        - {x: -26, y: 47}
+        - {x: -27, y: 48}
+        - {x: -29, y: 39}
+        - {x: -39, y: 23}
+        - {x: -60, y: -48}
+        - {x: -60, y: -107}
+        - {x: -16, y: -142}
+        - {x: 40, y: -142}
+        - {x: 56, y: -113}
+        - {x: 56, y: 123}
+        - {x: 35, y: 142}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bdb6b9b0791aaf60800000000000000
+      internalID: 8046271656193605048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_jump3_end_2
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 4
+        width: 137
+        height: 241
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 57.5, y: -49.5}
+        - {x: 64.5, y: 62.5}
+        - {x: 65.5, y: 101.5}
+        - {x: 58.5, y: 120.5}
+        - {x: -13.5, y: 120.5}
+        - {x: -40.5, y: 86.5}
+        - {x: -40.5, y: -110.5}
+        - {x: -15.5, y: -120.5}
+        - {x: 51.5, y: -120.5}
+        - {x: 68.5, y: -106.5}
+        - {x: 68.5, y: -84.5}
+        - {x: 66.5, y: -77.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4790c414c63d46e0800000000000000
+      internalID: -1851763655989749940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_jump3_end_3
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 0
+        width: 120
+        height: 263
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -60, y: 131.5}
+        - {x: -60, y: -131.5}
+        - {x: 31, y: -131.5}
+        - {x: 53, y: -112.5}
+        - {x: 53, y: 131.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49fff65be1cc20eb0800000000000000
+      internalID: -4755013824284721260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_jump3_end_4
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 0
+        width: 120
+        height: 275
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 37, y: 137.5}
+        - {x: -60, y: 137.5}
+        - {x: -60, y: -137.5}
+        - {x: 52, y: -137.5}
+        - {x: 60, y: -93.5}
+        - {x: 60, y: -40.5}
+        - {x: 44, y: 125.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16246e847da3710f0800000000000000
+      internalID: -1146382883827072415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

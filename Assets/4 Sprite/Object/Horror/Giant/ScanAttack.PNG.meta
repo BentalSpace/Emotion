@@ -1,0 +1,372 @@
+fileFormatVersion: 2
+guid: 37c636577d8fbb34f84a13ad4bc6d647
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6677439369439480310
+    second: ScanAttack_0
+  - first:
+      213: -7057934135732488216
+    second: ScanAttack_1
+  - first:
+      213: -3558196836778386293
+    second: ScanAttack_2
+  - first:
+      213: 1537660023674669845
+    second: ScanAttack_3
+  - first:
+      213: -2598134389105619927
+    second: ScanAttack_4
+  - first:
+      213: 2589125126191956340
+    second: ScanAttack_5
+  - first:
+      213: 5330375095548088893
+    second: ScanAttack_6
+  - first:
+      213: 5245612926302772103
+    second: ScanAttack_7
+  - first:
+      213: -8114136792363466324
+    second: ScanAttack_16
+  - first:
+      213: -5562221658563404547
+    second: ScanAttack_20
+  - first:
+      213: 3628409464551323299
+    second: ScanAttack_27
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ScanAttack_0
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 2469
+        width: 644
+        height: 795
+      alignment: 9
+      pivot: {x: 0.79, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f906a85ab70bac50800000000000000
+      internalID: 6677439369439480310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_1
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 2442
+        width: 615
+        height: 796
+      alignment: 9
+      pivot: {x: 0.78, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e7bf8f4c4e2d0e90800000000000000
+      internalID: -7057934135732488216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_2
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 2442
+        width: 604
+        height: 796
+      alignment: 9
+      pivot: {x: 0.78, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8cd7ee34debe9ec0800000000000000
+      internalID: -3558196836778386293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_3
+      rect:
+        serializedVersion: 2
+        x: 2764
+        y: 2457
+        width: 681
+        height: 902
+      alignment: 9
+      pivot: {x: 0.68, y: 0.095}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51b827805add65510800000000000000
+      internalID: 1537660023674669845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_4
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 1441
+        width: 552
+        height: 780
+      alignment: 9
+      pivot: {x: 0.75, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c02a2e98291fbd0800000000000000
+      internalID: -2598134389105619927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_5
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 1423
+        width: 757
+        height: 780
+      alignment: 9
+      pivot: {x: 0.82, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 471c5b1a59b6ee320800000000000000
+      internalID: 2589125126191956340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_6
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1401
+        width: 997
+        height: 802
+      alignment: 9
+      pivot: {x: 0.86, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d329bb968eb49f940800000000000000
+      internalID: 5330375095548088893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 27
+        width: 1002
+        height: 1121
+      alignment: 9
+      pivot: {x: 0.86, y: 0.09}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78b597df9292cc840800000000000000
+      internalID: 5245612926302772103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_16
+      rect:
+        serializedVersion: 2
+        x: 2474
+        y: 833
+        width: 95
+        height: 123
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca18f30f39bc46f80800000000000000
+      internalID: -8114136792363466324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_20
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 81
+        width: 566
+        height: 780
+      alignment: 9
+      pivot: {x: 0.76, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc18571fd40fc2b0800000000000000
+      internalID: -5562221658563404547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanAttack_27
+      rect:
+        serializedVersion: 2
+        x: 2441
+        y: 146
+        width: 409
+        height: 239
+      alignment: 9
+      pivot: {x: 0.04, y: 0.84}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a63f321f23ba5230800000000000000
+      internalID: 3628409464551323299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
